@@ -120,9 +120,11 @@ def get_profile():
 
 @app.route('/submit_report')
 def submit_report():
+    username = request.args.get('username')
     latitude = request.args.get('latitude')
     longitude = request.args.get('longitude')
-
+    
+    update_report_count(username)
     #TODO deal with me
 
     return {"response" : "Submitted"}

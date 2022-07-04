@@ -11,7 +11,7 @@ const Header = ({ onProfileClick, profile, dayMode, setDayMode }) => {
             :
                 <BsSun onClick = {setDayMode} size = "30px" cursor= "pointer"/>
             }
-            <h1 style = {{ "fontSize" : "65px", "marginLeft" : "85px" }}>Litterbot Reporting System</h1>
+            <h1 style = {{ fontSize : "65px", marginLeft : "85px" }}>Litterbot Reporting System</h1>
             <Button text = {profile} onClick = {() => onProfileClick(`${profile === "Log In" ? "login" : "profile"}`)} dayMode = {dayMode}/>
         </div>
     )

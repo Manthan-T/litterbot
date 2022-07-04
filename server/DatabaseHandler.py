@@ -8,24 +8,8 @@ def alter_tables():
     cursor = conn.cursor()
     
     cursor.execute("""
-        CREATE TABLE not_verified (
-            userID INTEGER NOT NULL UNIQUE,
-            verif_code TEXT NOT NULL
-        )
-    """)
-    conn.commit()
-    
-    cursor.execute("""
-        CREATE TABLE users (
-            userID INTEGER PRIMARY KEY,
-            first_name TEXT NOT NULL,
-            last_name TEXT NOT NULL,
-            username TEXT NOT NULL UNIQUE,
-            password TEXT NOT NULL UNIQUE,
-            email_address TEXT NOT NULL,
-            phone_number TEXT NOT NULL,
-            date_registered TEXT NOT NULL
-        )
+        ALTER TABLE users
+        ADD reports_submitted INTEGER NOT NULL DEFAULT 0;
     """)
     conn.commit()
 
@@ -96,6 +80,7 @@ def delete_user(username, password):
     try:
         userID = cursor.fetchone()[0]
     except TypeError:
+        conn.close()
         return
     
     cursor.execute("""
@@ -124,6 +109,7 @@ def delete_account_db(username, password):
     try:
         userID = cursor.fetchone()[0]
     except TypeError:
+        conn.close()
         return False
     
     cursor.execute("""
@@ -215,6 +201,7 @@ def verify_user(username, code):
     try:
         userID = cursor.fetchone()[0]
     except TypeError:
+        conn.close()
         return
 
     cursor.execute("""
@@ -248,6 +235,7 @@ def update_verif_code(username, code):
     try:
         userID = cursor.fetchone()[0]
     except TypeError:
+        conn.close()
         return
 
     cursor.execute("""
@@ -255,6 +243,30 @@ def update_verif_code(username, code):
             SET verif_code = "{code}"
             WHERE userID = {userID}
     """.format(userID = userID, code = code))
+    conn.commit()
+
+    conn.close()
+
+@staticmethod
+def update_report_count(username):
+    conn = sql.connect("server/litterbot.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT reports_submitted FROM users
+        WHERE username = "{username}"
+    """.format(username = username))
+    try:
+        reports_submitted = cursor.fetchone()[0] + 1
+    except TypeError:
+        conn.close()
+        return
+
+    cursor.execute("""
+            UPDATE users
+            SET reports_submitted = "{reports_submitted}"
+            WHERE username = "{username}"
+    """.format(username = username, reports_submitted = reports_submitted))
     conn.commit()
 
     conn.close()

@@ -35,9 +35,9 @@ const Login = ({ onBackClick, onSignUpClick, setProfile, dayMode }) => {
 
     return (
         <>
-            <div className = "bar" style = {{ "marginTop" : "2px" }}>
+            <div className = "bar" style = {{ marginTop : "2px" }}>
                 <FaArrowLeft onClick = {onBackClick} size = "35px" cursor = "pointer"/>
-                <h1 style = {{ "marginLeft" : "230px" }}>Please enter your username and password</h1>
+                <h1 style = {{ marginLeft : "230px" }}>Please enter your username and password</h1>
                 <Button text = {"Don't have an account?"} onClick = {onSignUpClick} dayMode = {dayMode}/>
             </div>
 
@@ -51,7 +51,7 @@ const Login = ({ onBackClick, onSignUpClick, setProfile, dayMode }) => {
                     <input type = "text" placeholder = "Password" value = {password} onChange = {(e) => setPassword(e.target.value)}/>
                 </div>
 
-                <input type = "submit" value = {submitLabel} className = {`btn btn-block ${dayMode ? "light-mode": ""}`} style = {{"cursor" : "pointer"}}/>
+                <input type = "submit" value = {submitLabel} className = {`btn btn-block ${dayMode ? "light-mode": ""}`} style = {{ cursor : "pointer" }}/>
             </form>
         </>
     )

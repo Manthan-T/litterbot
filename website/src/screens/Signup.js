@@ -129,14 +129,14 @@ const Signup = ({ onBackClick, dayMode }) => {
     
     return (
         <>
-            <div className = "bar" style = {{ "marginTop" : "5px" }}>
+            <div className = "bar" style = {{ marginTop : "5px" }}>
                 <FaArrowLeft onClick = {() => {
                     if (instructions !== "Your account has been successfully created! Please go back and log in") {
                         removeUnverifiedUser()
                     }
                     onBackClick()
                 }} size = "35px" cursor = "pointer"/>
-                <h1 style = {{ "marginLeft" : "-20px" }}>{instructions}</h1>
+                <h1 style = {{ marginLeft : "-20px" }}>{instructions}</h1>
                 <p/>
             </div>
 
@@ -171,7 +171,7 @@ const Signup = ({ onBackClick, dayMode }) => {
                         <p>{phoneError}</p>
                     </div>
 
-                    <input type = "submit" value = {submitLabel} className = {`btn btn-block ${dayMode ? "light-mode": ""}`} style = {{"cursor" : "pointer"}}/>
+                    <input type = "submit" value = {submitLabel} className = {`btn btn-block ${dayMode ? "light-mode": ""}`} style = {{ cursor : "pointer" }}/>
                 </form>
             ) : (
                 <form className = "container" onSubmit = {onSubmit}>
@@ -183,10 +183,10 @@ const Signup = ({ onBackClick, dayMode }) => {
                                 <input type = "text" placeholder = "000000" value = {verifCode} onChange = {(e) => setVerifCode(e.target.value)}/>
                             </div>
 
-                            <h4 style = {{ "textAlign" : "center" }}>Didn't get an email? Click here to resend it:</h4>
-                            <FaArrowCircleRight size = "25px" style = {{ "marginLeft" : "50%" }} cursor = "pointer" onClick = {() => fetch(`/signup/resend_email?name=${firstName}&username=${username}&email=${email}`)}/>
+                            <h4 style = {{ textAlign : "center" }}>Didn't get an email? Click here to resend it:</h4>
+                            <FaArrowCircleRight size = "25px" style = {{ marginLeft : "50%" }} cursor = "pointer" onClick = {() => fetch(`/signup/resend_email?name=${firstName}&username=${username}&email=${email}`)}/>
                             
-                            <input type = "submit" value = {submitLabel} className = {`btn btn-block ${dayMode ? "light-mode": ""}`} style = {{"cursor" : "pointer"}}/>
+                            <input type = "submit" value = {submitLabel} className = {`btn btn-block ${dayMode ? "light-mode": ""}`} style = {{ cursor : "pointer" }}/>
                         </>)}
                 </form>
             )}

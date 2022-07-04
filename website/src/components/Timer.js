@@ -21,7 +21,7 @@ const Timer = ({ actionOnTimeUp, setInstructions, extra }) => {
     }, [actionOnTimeUp])
 
     return (
-        <h2 style = {{ "textAlign" : "center" }}>{timeLeft}</h2>
+        <h2 style = {{ textAlign : "center" }}>{timeLeft}</h2>
     )
 }
 

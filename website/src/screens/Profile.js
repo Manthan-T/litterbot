@@ -48,9 +48,9 @@ const Profile = ({ onBackClick, onLogout, username, dayMode }) => {
 
     return (
         <>
-            <div className = "bar" style = {{ "marginTop" : "5px" }}>
+            <div className = "bar" style = {{ marginTop : "5px" }}>
                 <FaArrowLeft onClick = {onBackClick} size = "35px" cursor = "pointer"/>
-                <h1 style = {{ "marginLeft" : "3%" }}>Your Profile:</h1>
+                <h1 style = {{ marginLeft : "3%" }}>Your Profile:</h1>
                 <Button text = "Log Out" onClick = {() => {
                     onLogout()
                     onBackClick()
@@ -58,11 +58,11 @@ const Profile = ({ onBackClick, onLogout, username, dayMode }) => {
             </div>
             <div className = "container">
                 {profile.map((property) => (
-                    <h4 style = {{"textAlign" : "center"}}>{property.slice(0, 8) === "Password" ? password : property} {property.slice(0, 8) === "Password" && <FaEye style = {{ "cursor" : "pointer" }} size = "20px" onClick = {toggle_password}/>}</h4>
+                    <h4 style = {{textAlign : "center"}}>{property.slice(0, 8) === "Password" ? password : property} {property.slice(0, 8) === "Password" && <FaEye style = {{ "cursor" : "pointer" }} size = "20px" onClick = {toggle_password}/>}</h4>
                 ))}
             </div>
 
-            <Button className = "btn-block" style = {{ "maxWidth" : "30%", "marginLeft" : "35%", "marginBottom" : "15px" }} text = "Delete Account" onClick = {() => setDeletePopupOpen(!deletePopupOpen)} dayMode = {dayMode}/>
+            <Button className = "btn-block" style = {{ maxWidth : "30%", marginLeft : "35%", marginBottom : "15px" }} text = "Delete Account" onClick = {() => setDeletePopupOpen(!deletePopupOpen)} dayMode = {dayMode}/>
             {deletePopupOpen && (
                 <Popup title = "Are you sure you want to delete your account?" animation = "fade-in"
                     content = {
@@ -72,7 +72,7 @@ const Profile = ({ onBackClick, onLogout, username, dayMode }) => {
                                 <input type = "text" placeholder = "Your Password" value = {pwdInput} onChange = {(e) => setPwdInput(e.target.value)}/>
                             </div>
 
-                            <input type = "submit" value = {deleteButton} className = {`btn btn-block ${dayMode ? "light-mode": ""}`} style = {{"cursor" : "pointer"}}/>
+                            <input type = "submit" value = {deleteButton} className = {`btn btn-block ${dayMode ? "light-mode": ""}`} style = {{ cursor : "pointer" }}/>
                         </form>
                     }
                     handleClose = {() => {
@@ -85,8 +85,8 @@ const Profile = ({ onBackClick, onLogout, username, dayMode }) => {
                 </Popup>
             )}
 
-            <h4 style = {{ "textAlign" : "center", "marginTop" : "100px" }}>We are dedicated to keeping the streets of London and the UK clean.</h4>
-            <h4 style = {{ "textAlign" : "center" }}>Please contact us at thequintuscult@gmail.com for support, or for help to set up a Litterbot army for your own streets!</h4>
+            <h4 style = {{ textAlign : "center", marginTop : "100px" }}>We are dedicated to keeping the streets of London and the UK clean.</h4>
+            <h4 style = {{ textAlign : "center" }}>Please contact us at thequintuscult@gmail.com for support, or for help to set up a Litterbot army for your own streets!</h4>
         </>
     )
 }

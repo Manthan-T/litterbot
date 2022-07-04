@@ -12,28 +12,22 @@ const Menu = ({ profile, dayMode }) => {
             {profile !== "Log In" && (
                 <>
                     <div className = "container">
-                        <div style = {{ "marginLeft" : "150px" }}>
+                        <div style = {{ marginLeft : "150px" }}>
                             <Button text = "Submit Report" onClick = {() => {
                                 if (!reportCooldown) {
-                                    if (window.navigator.geolocation) {
-                                        window.navigator.geolocation.getCurrentPosition(setPosition, () => {
-                                            navigator.permissions.query({name:'geolocation'}).then(function(result) {
-                                                if (result.state !== 'granted') {
-                                                    alert("You cannot submit a report without enabling location permissions")
-                                                }
-                                            })
+                                    window.navigator.geolocation.getCurrentPosition(setPosition, () => {
+                                        navigator.permissions.query({ name : "geolocation" }).then(result => {
+                                            if (result.state !== "granted") {
+                                                alert("You cannot submit a report without enabling location permissions")
+                                            }
                                         })
-                                    }
+                                    })
                                         
                                     if (position !== null) {
-                                        fetch(`/submit_report?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`)
-                                            .then(res => res.json()).then(data => {
-                                                if (data.response !== "Submitted") {
-                                                    alert("The report could not be sent")
-                                                } else {
-                                                    alert("Thank you for your report")
-                                                    setReportCooldown(true)
-                                                }
+                                        fetch(`/submit_report?username=${profile}&latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`)
+                                            .then(res => res.json()).then(() => {
+                                                alert("Thank you for your report")
+                                                setReportCooldown(true)
                                             }
                                         )
                                     } else {
