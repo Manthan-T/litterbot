@@ -5,10 +5,10 @@ import Login from "./screens/Login"
 import Signup from "./screens/Signup"
 import Profile from "./screens/Profile"
 
-function App() {
+function App({ toggleLight }) {
     const [profile, setProfile] = useState("Log In")
     const [currentPage, setCurrentPage] = useState("home")
-    const [nightMode, setNightMode] = useState(true)
+    const [dayMode, setDayMode] = useState(false)
     
     useEffect(() => {
         if (localStorage.getItem("profile") != null) {
@@ -18,16 +18,20 @@ function App() {
     
     switch (currentPage) {
         case "home":
-            return (<Home onProfileClick = {setCurrentPage} profile = {profile} nightMode = {nightMode} setNightMode = {setNightMode}/>)
+            return (<Home onProfileClick = {setCurrentPage} profile = {profile} dayMode = {dayMode} setDayMode = {() => {
+                setDayMode(!dayMode)
+                toggleLight()
+                console.log("hi")
+            }}/>)
         case "login":
-            return (<Login onBackClick = {() => setCurrentPage("home")} onSignUpClick = {() => setCurrentPage("signup")} setProfile = {setProfile}/>)
+            return (<Login onBackClick = {() => setCurrentPage("home")} onSignUpClick = {() => setCurrentPage("signup")} setProfile = {setProfile} dayMode = {dayMode}/>)
         case "signup":
-            return (<Signup onBackClick = {() => setCurrentPage("login")}/>)
+            return (<Signup onBackClick = {() => setCurrentPage("login")} dayMode = {dayMode}/>)
         case "profile":
             return (<Profile onBackClick = {() => setCurrentPage("home")} onLogout = {() => {
                 localStorage.removeItem("profile")
                 setProfile("Log In")
-            }} username = {profile}/>)
+            }} username = {profile} dayMode = {dayMode}/>)
         default:
             break
     }

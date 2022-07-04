@@ -3,7 +3,7 @@ import { FaArrowLeft } from "react-icons/fa"
 
 import Button from "../components/Button"
 
-const Login = ({ onBackClick, onSignUpClick, setProfile }) => {
+const Login = ({ onBackClick, onSignUpClick, setProfile, dayMode }) => {
     const [submitLabel, setSubmitLabel] = useState("Log In")
 
     const [username, setUsername] = useState("")
@@ -38,7 +38,7 @@ const Login = ({ onBackClick, onSignUpClick, setProfile }) => {
             <div className = "bar" style = {{ "marginTop" : "2px" }}>
                 <FaArrowLeft onClick = {onBackClick} size = "35px" cursor = "pointer"/>
                 <h1 style = {{ "marginLeft" : "230px" }}>Please enter your username and password</h1>
-                <Button text = {"Don't have an account?"} onClick = {onSignUpClick}/>
+                <Button text = {"Don't have an account?"} onClick = {onSignUpClick} dayMode = {dayMode}/>
             </div>
 
             <form className = "container" onSubmit = {onSubmit}>
@@ -51,7 +51,7 @@ const Login = ({ onBackClick, onSignUpClick, setProfile }) => {
                     <input type = "text" placeholder = "Password" value = {password} onChange = {(e) => setPassword(e.target.value)}/>
                 </div>
 
-                <input type = "submit" value = {submitLabel} className = "btn btn-block"/>
+                <input type = "submit" value = {submitLabel} className = {`btn btn-block ${dayMode ? "light-mode": ""}`} style = {{"cursor" : "pointer"}}/>
             </form>
         </>
     )

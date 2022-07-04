@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import Button from "./Button"
 import Timer from "./Timer"
 
-const Menu = ({ profile }) => {
+const Menu = ({ profile, dayMode }) => {
     const [position, setPosition] = useState(null)
     const [reportCooldown, setReportCooldown] = useState(false)
 
@@ -44,7 +44,7 @@ const Menu = ({ profile }) => {
                                 } else {
                                     alert("You cannot send a report until the timer is up")
                                 }
-                            }}/>
+                            }} dayMode = {dayMode}/>
                         </div>
                     </div>
                     

@@ -3,7 +3,7 @@ import { FaArrowLeft, FaArrowCircleRight } from "react-icons/fa"
 
 import Timer from "../components/Timer"
 
-const Signup = ({ onBackClick }) => {
+const Signup = ({ onBackClick, dayMode }) => {
     const [submitLabel, setSubmitLabel] = useState("Sign Up!")
     const [instructions, setInstructions] = useState("Please enter your details to sign up")
     const [verifCode, setVerifCode] = useState("")
@@ -171,7 +171,7 @@ const Signup = ({ onBackClick }) => {
                         <p>{phoneError}</p>
                     </div>
 
-                    <input type = "submit" value = {submitLabel} className = "btn btn-block"/>
+                    <input type = "submit" value = {submitLabel} className = {`btn btn-block ${dayMode ? "light-mode": ""}`} style = {{"cursor" : "pointer"}}/>
                 </form>
             ) : (
                 <form className = "container" onSubmit = {onSubmit}>
@@ -184,7 +184,9 @@ const Signup = ({ onBackClick }) => {
                             </div>
 
                             <h4 style = {{ "textAlign" : "center" }}>Didn't get an email? Click here to resend it:</h4>
-                            <FaArrowCircleRight size = "25px" style = {{ "marginLeft" : "50%" }} cursor = "pointer" onClick = {() => fetch(`/signup/resend_email?name=${firstName}&username=${username}&email=${email}`)}/>                            <input type = "submit" value = {submitLabel} className = "btn btn-block"/>
+                            <FaArrowCircleRight size = "25px" style = {{ "marginLeft" : "50%" }} cursor = "pointer" onClick = {() => fetch(`/signup/resend_email?name=${firstName}&username=${username}&email=${email}`)}/>
+                            
+                            <input type = "submit" value = {submitLabel} className = {`btn btn-block ${dayMode ? "light-mode": ""}`} style = {{"cursor" : "pointer"}}/>
                         </>)}
                 </form>
             )}

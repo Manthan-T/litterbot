@@ -3,11 +3,11 @@ import { FaTimes } from "react-icons/fa"
 
 import "../animations/fade.css"
 
-const Popup = ({ title, content, handleClose, animation}) => {
+const Popup = ({ title, content, handleClose, animation, dayMode}) => {
     return (
         <div className = {animation}>
             <div className = "background">
-                <div className = "popup-box">
+                <div className = {`popup-box ${dayMode ? "light-mode" : ""}`}>
                     <span>
                         <FaTimes style = {{ "cursor" : "pointer", "color" : "red" }} size = "30px" onClick = {handleClose}/>
                         <h3 style = {{ "textAlign" : "center", "marginTop" : "-35px" }}>{title}</h3>

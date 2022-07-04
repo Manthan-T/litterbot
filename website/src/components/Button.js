@@ -1,13 +1,9 @@
 import React from "react"
 
-const Button = ({ text, onClick, className, style }) => {
+const Button = ({ text, onClick, className, style, dayMode }) => {
     return (
-        <button onClick = {onClick} className = {className} style = {style}>{text}</button>
+        <button onClick = {onClick} className = {`btn ${dayMode ? "light-mode" : ""} ${className}`} style = {style}>{text}</button>
     )
-}
-
-Button.defaultProps = {
-   className : "btn" 
 }
 
 export default Button

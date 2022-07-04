@@ -4,7 +4,7 @@ import { FaArrowLeft, FaEye } from "react-icons/fa"
 import Button from "../components/Button"
 import Popup from "../components/Popup"
 
-const Profile = ({ onBackClick, onLogout, username }) => {
+const Profile = ({ onBackClick, onLogout, username, dayMode }) => {
     const [profile, setProfile] = useState([])
     const [password, setPassword] = useState("")
     const [passwordShown, setPasswordShown] = useState(false)
@@ -54,7 +54,7 @@ const Profile = ({ onBackClick, onLogout, username }) => {
                 <Button text = "Log Out" onClick = {() => {
                     onLogout()
                     onBackClick()
-                }}/>
+                }} dayMode = {dayMode}/>
             </div>
             <div className = "container">
                 {profile.map((property) => (
@@ -62,7 +62,7 @@ const Profile = ({ onBackClick, onLogout, username }) => {
                 ))}
             </div>
 
-            <Button className = "btn btn-block" style = {{ "maxWidth" : "30%", "marginLeft" : "35%", "marginBottom" : "15px" }} text = "Delete Account" onClick = {() => setDeletePopupOpen(!deletePopupOpen)}/>
+            <Button className = "btn-block" style = {{ "maxWidth" : "30%", "marginLeft" : "35%", "marginBottom" : "15px" }} text = "Delete Account" onClick = {() => setDeletePopupOpen(!deletePopupOpen)} dayMode = {dayMode}/>
             {deletePopupOpen && (
                 <Popup title = "Are you sure you want to delete your account?" animation = "fade-in"
                     content = {
@@ -72,14 +72,16 @@ const Profile = ({ onBackClick, onLogout, username }) => {
                                 <input type = "text" placeholder = "Your Password" value = {pwdInput} onChange = {(e) => setPwdInput(e.target.value)}/>
                             </div>
 
-                            <input type = "submit" value = {deleteButton} className = "btn btn-block"/>
+                            <input type = "submit" value = {deleteButton} className = {`btn btn-block ${dayMode ? "light-mode": ""}`} style = {{"cursor" : "pointer"}}/>
                         </form>
                     }
                     handleClose = {() => {
                         setDeleteButton("Delete Account")
                         setPwdInput("")
                         setDeletePopupOpen(!deletePopupOpen)
-                    }}>
+                    }}
+                    dayMode = {dayMode}
+                    >
                 </Popup>
             )}
 
