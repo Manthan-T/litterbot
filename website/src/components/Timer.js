@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 
 const Timer = ({ actionOnTimeUp, setInstructions, extra }) => {
-    
     const [timeLeft, setTimeLeft] = useState("5 minutes left")
 
     useEffect(() => {

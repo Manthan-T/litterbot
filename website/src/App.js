@@ -8,6 +8,7 @@ import Profile from "./screens/Profile"
 function App() {
     const [profile, setProfile] = useState("Log In")
     const [currentPage, setCurrentPage] = useState("home")
+    const [nightMode, setNightMode] = useState(true)
     
     useEffect(() => {
         if (localStorage.getItem("profile") != null) {
@@ -17,7 +18,7 @@ function App() {
     
     switch (currentPage) {
         case "home":
-            return (<Home onProfileClick = {setCurrentPage} profile = {profile}/>)
+            return (<Home onProfileClick = {setCurrentPage} profile = {profile} nightMode = {nightMode} setNightMode = {setNightMode}/>)
         case "login":
             return (<Login onBackClick = {() => setCurrentPage("home")} onSignUpClick = {() => setCurrentPage("signup")} setProfile = {setProfile}/>)
         case "signup":

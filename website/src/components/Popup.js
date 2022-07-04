@@ -4,7 +4,6 @@ import { FaTimes } from "react-icons/fa"
 import "../animations/fade.css"
 
 const Popup = ({ title, content, handleClose, animation}) => {
-
     return (
         <div className = {animation}>
             <div className = "background">
