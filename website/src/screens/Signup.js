@@ -20,6 +20,7 @@ const Signup = ({ onBackClick, dayMode }) => {
     const [lastNameError, setLastNameError] = useState("")
     const [usernameError, setUsernameError] = useState("")
     const [passwordError, setPasswordError] = useState("")
+    const [confirmPasswordError, setConfirmPasswordError] = useState("")
     const [emailError, setEmailError] = useState("")
     const [phoneError, setPhoneError] = useState("")
     const [codeError, setCodeError] = useState("")
@@ -62,6 +63,16 @@ const Signup = ({ onBackClick, dayMode }) => {
             setPasswordError("Please enter a password")
             return
         }
+
+        if (!confirmPassword) {
+            setConfirmPasswordError("Please confirm your password")
+            return
+        }
+
+        if (confirmPassword !== password) {
+            setConfirmPasswordError("This does not match your password")
+            return
+        }
         
         if (!email) {
             setEmailError("Please enter your email address")
@@ -80,39 +91,57 @@ const Signup = ({ onBackClick, dayMode }) => {
 
                     switch (data.component) {
                         case "username":
+                            setFirstNameError("")
+                            setLastNameError("")
                             setUsernameError(data.response)
                             setPasswordError("")
+                            setConfirmPasswordError("")
                             setEmailError("")
                             setPhoneError("")
                             break
                         case "password":
+                            setFirstNameError("")
+                            setLastNameError("")
                             setUsernameError("")
                             setPasswordError(data.response)
+                            setConfirmPasswordError("")
                             setEmailError("")
                             setPhoneError("")
                             break
                         case "email":
+                            setFirstNameError("")
+                            setLastNameError("")
                             setUsernameError("")
                             setPasswordError("")
+                            setConfirmPasswordError("")
                             setEmailError(data.response)
                             setPhoneError("")
                             break
                         case "phone":
+                            setFirstNameError("")
+                            setLastNameError("")
                             setUsernameError("")
                             setPasswordError("")
+                            setConfirmPasswordError("")
                             setEmailError("")
                             setPhoneError(data.response)
                             break
                         default:
+                            setFirstNameError("")
+                            setLastNameError("")
                             setUsernameError("")
                             setPasswordError("")
+                            setConfirmPasswordError("")
                             setEmailError("")
                             setPhoneError("")
                     }
 
                 } else {
+                    setFirstNameError("")
+                    setLastNameError("")
                     setUsernameError("")
                     setPasswordError("")
+                    setConfirmPasswordError("")
                     setEmailError("")
                     setPhoneError("")
                     setInstructions("Please check your email and enter the 6 digit verification code. You have 5 minutes or until you exit this page.")
@@ -133,8 +162,9 @@ const Signup = ({ onBackClick, dayMode }) => {
                 }
 
                 if (data.response !== "Accepted") {
-                    setSubmitLabel("Please try again")
+                    setCodeError("Incorrect code")
                 } else {
+                    setCodeError("")
                     setInstructions("Your account has been successfully created! Please go back and log in")
                     setSubmitLabel("Check code")
                 }
@@ -176,6 +206,11 @@ const Signup = ({ onBackClick, dayMode }) => {
                         <label>Password</label>
                         <input type = "text" placeholder = "E.g. i3Rk^!$sfP05z" value = {password} onChange = {(e) => setPassword(e.target.value)}/>
                         <p>{passwordError}</p>
+                    </div>
+                    <div className = "form-control">
+                        <label>Confirm Password</label>
+                        <input type = "text" placeholder = "E.g. i3Rk^!$sfP05z" value = {confirmPassword} onChange = {(e) => setConfirmPassword(e.target.value)}/>
+                        <p>{confirmPasswordError}</p>
                     </div>
                     <div className = "form-control">
                         <label>Email address</label>
