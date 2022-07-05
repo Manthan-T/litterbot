@@ -114,6 +114,7 @@ def get_profile():
     results[4] = "Email address: " + results[4]
     results[5] = "Phone number: " + results[5]
     results[6] = "Date joined: " + results[6]
+    results[7] = "Reports submitted: " + str(results[7])
     results = [tuple(results)]
     
     return {"profile" : results}

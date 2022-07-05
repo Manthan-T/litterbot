@@ -30,7 +30,8 @@ def add_user(first_name, last_name, username, password, email_address, phone_num
             "{password}",
             "{email_address}",
             "{phone_number}",
-            "{date}"
+            "{date}",
+            0
         )
     """.format(
         first_name = first_name,
