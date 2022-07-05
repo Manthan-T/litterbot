@@ -46,40 +46,101 @@ const Signup = ({ onBackClick, dayMode }) => {
 
         if (!firstName) {
             setFirstNameError("Please enter your first name")
+            setLastNameError("")
+            setUsernameError("")
+            setPasswordError("")
+            setConfirmPasswordError("")
+            setEmailError("")
+            setPhoneError("")
             return
         }
         
         if (!lastName) {
+            setFirstNameError("")
             setLastNameError("Please enter your last name")
+            setUsernameError("")
+            setPasswordError("")
+            setConfirmPasswordError("")
+            setEmailError("")
+            setPhoneError("")
             return
         }
         
         if (!username) {
+            setFirstNameError("")
+            setLastNameError("")
             setUsernameError("Please enter a username")
+            setPasswordError("")
+            setConfirmPasswordError("")
+            setEmailError("")
+            setPhoneError("")
             return
         }
         
         if (!password) {
+            setFirstNameError("")
+            setLastNameError("")
+            setUsernameError("")
             setPasswordError("Please enter a password")
+            setConfirmPasswordError("")
+            setEmailError("")
+            setPhoneError("")
+            return
+        }
+
+        if (!(password.match(/[A-Z]/g) && password.match(/[a-z]/g) && password.match(/[0-9]/g) && password.match(/[!()\[\].?_-`~@#$^&*=+£]/g))) {
+            setFirstNameError("")
+            setLastNameError("")
+            setUsernameError("")
+            setPasswordError("Passwords must contain upper and lowercase letters, numbers, and the at least one of the symbols:\n"
+                           + "!()[].?_-`~@#$^&*=+£\n"
+                           + "Please try another password.")
+            setConfirmPasswordError("")
+            setEmailError("")
+            setPhoneError("")
             return
         }
 
         if (!confirmPassword) {
+            setFirstNameError("")
+            setLastNameError("")
+            setUsernameError("")
+            setPasswordError("")
             setConfirmPasswordError("Please confirm your password")
+            setEmailError("")
+            setPhoneError("")
             return
         }
 
         if (confirmPassword !== password) {
+            setFirstNameError("")
+            setLastNameError("")
+            setUsernameError("")
+            setPasswordError("")
             setConfirmPasswordError("This does not match your password")
+            setEmailError("")
+            setPhoneError("")
             return
         }
         
         if (!email) {
+            setFirstNameError("")
+            setLastNameError("")
+            setUsernameError("")
+            setPasswordError("")
+            setConfirmPasswordError("")
             setEmailError("Please enter your email address")
+            setPhoneError("")
             return
         }
         
         if (!phoneNumber) {
+            setFirstNameError("")
+            setLastNameError("")
+            setUsernameError("")
+            setPasswordError("")
+            setConfirmPasswordError("")
+            setEmailError("")
             setPhoneError("Please enter your phone number")
             return
         }
