@@ -7,12 +7,14 @@ import Popup from "../components/Popup"
 const Profile = ({ onBackClick, onLogout, username, dayMode }) => {
     const [profile, setProfile] = useState([])
     const [password, setPassword] = useState("")
+    const [passwordError, setPasswordError] = useState("")
     const [passwordShown, setPasswordShown] = useState(false)
     const [deletePopupOpen, setDeletePopupOpen] = useState(false);
     const [deleteButton, setDeleteButton] = useState("Delete Account");
     const [pwdInput, setPwdInput] = useState("");
 
     useEffect(() => {
+        sessionStorage.setItem("page", "profile")
         fetch(`/get_profile?username=${username}`).then(res => res.json()).then(data => {
             setProfile(...data.profile)
             setPassword("Password: " + data.profile[0][3].slice(10).replace(/./g, "*"))
@@ -32,7 +34,7 @@ const Profile = ({ onBackClick, onLogout, username, dayMode }) => {
         e.preventDefault()
 
         if (!pwdInput) {
-            alert("Please enter your password")
+            setPasswordError("Please enter your password")
             return
         }
 
@@ -70,6 +72,7 @@ const Profile = ({ onBackClick, onLogout, username, dayMode }) => {
                             <div className = "form-control">
                                 <label>Password</label>
                                 <input type = "text" placeholder = "Your Password" value = {pwdInput} onChange = {(e) => setPwdInput(e.target.value)}/>
+                                <p>{passwordError}</p>
                             </div>
 
                             <input type = "submit" value = {deleteButton} className = {`btn btn-block ${dayMode ? "light-mode": ""}`} style = {{ cursor : "pointer" }}/>

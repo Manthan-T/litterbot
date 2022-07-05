@@ -7,13 +7,15 @@ import Profile from "./screens/Profile"
 
 function App({ toggleLight }) {
     const [profile, setProfile] = useState("Log In")
-    const [currentPage, setCurrentPage] = useState("home")
+    const [currentPage, setCurrentPage] = useState(`${sessionStorage.getItem("page") === null ? "home" : sessionStorage.getItem("page")}`)
     const [dayMode, setDayMode] = useState(false)
     
     useEffect(() => {
         if (localStorage.getItem("profile") != null) {
             setProfile(localStorage.getItem("profile"))
         }
+        setCurrentPage(sessionStorage.getItem("page"))
+        console.log(currentPage)
     })
     
     switch (currentPage) {
@@ -21,7 +23,6 @@ function App({ toggleLight }) {
             return (<Home onProfileClick = {setCurrentPage} profile = {profile} dayMode = {dayMode} setDayMode = {() => {
                 setDayMode(!dayMode)
                 toggleLight()
-                console.log("hi")
             }}/>)
         case "login":
             return (<Login onBackClick = {() => setCurrentPage("home")} onSignUpClick = {() => setCurrentPage("signup")} setProfile = {setProfile} dayMode = {dayMode}/>)

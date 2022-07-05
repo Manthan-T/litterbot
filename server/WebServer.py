@@ -36,6 +36,12 @@ def signup():
                 "response" : "This password is shorter than 8 characters. Please try a longer password."
                }
 
+    if len(password) < 8:
+        return {
+                "component" : "password",
+                "response" : "Passwords must contain upper and lowercase letters, numbers, and symbols. Please try another password."
+               }
+
     if not check_username_copies(username):
         return {
                 "component" : "username",

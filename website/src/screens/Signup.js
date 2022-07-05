@@ -16,20 +16,27 @@ const Signup = ({ onBackClick, dayMode }) => {
     const [email, setEmail] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
 
+    const [firstNameError, setFirstNameError] = useState("")
+    const [lastNameError, setLastNameError] = useState("")
     const [usernameError, setUsernameError] = useState("")
     const [passwordError, setPasswordError] = useState("")
     const [emailError, setEmailError] = useState("")
     const [phoneError, setPhoneError] = useState("")
+    const [codeError, setCodeError] = useState("")
 
     const removeUnverifiedUser = useCallback(() => {
         fetch(`/delete_user?username=${username}&password=${password}`)
     }, [username, password])
 
     useEffect(() => {
-        window.addEventListener("beforeunload", removeUnverifiedUser)
-        
+        sessionStorage.setItem("page", "signup")
+        window.addEventListener("beforeunload", () => {
+            removeUnverifiedUser()
+        })
         return () => {
-            window.removeEventListener("beforeunload", removeUnverifiedUser)
+            window.removeEventListener("beforeunload", () => {
+                removeUnverifiedUser()
+            })
         }
     }, [removeUnverifiedUser])
 
@@ -37,32 +44,32 @@ const Signup = ({ onBackClick, dayMode }) => {
         e.preventDefault()
 
         if (!firstName) {
-            alert("Please enter your first name")
+            setFirstNameError("Please enter your first name")
             return
         }
         
         if (!lastName) {
-            alert("Please enter your last name")
+            setLastNameError("Please enter your last name")
             return
         }
         
         if (!username) {
-            alert("Please enter a username")
+            setUsernameError("Please enter a username")
             return
         }
         
         if (!password) {
-            alert("Please enter a password")
+            setPasswordError("Please enter a password")
             return
         }
         
         if (!email) {
-            alert("Please enter your email address")
+            setEmailError("Please enter your email address")
             return
         }
         
         if (!phoneNumber) {
-            alert("Please enter your phone number")
+            setPhoneError("Please enter your phone number")
             return
         }
         
@@ -104,6 +111,10 @@ const Signup = ({ onBackClick, dayMode }) => {
                     }
 
                 } else {
+                    setUsernameError("")
+                    setPasswordError("")
+                    setEmailError("")
+                    setPhoneError("")
                     setInstructions("Please check your email and enter the 6 digit verification code. You have 5 minutes or until you exit this page.")
                     setSubmitLabel("Check code")
                 }
@@ -117,7 +128,7 @@ const Signup = ({ onBackClick, dayMode }) => {
         fetch(`/signup/verify_code?username=${username}&code=${verifCode}`)
             .then(res => res.json()).then(data => {
                 if (!verifCode) {
-                    alert("Please enter a code")
+                    setCodeError("Please enter a code")
                     return
                 }
 
@@ -149,10 +160,12 @@ const Signup = ({ onBackClick, dayMode }) => {
                     <div className = "form-control">
                         <label>First name</label>
                         <input type = "text" placeholder = "E.g. Bob" value = {firstName} onChange = {(e) => setFirstName(e.target.value)}/>
+                        <p>{firstNameError}</p>
                     </div>
                     <div className = "form-control">
                         <label>Last name</label>
                         <input type = "text" placeholder = "E.g. Smith" value = {lastName} onChange = {(e) => setLastName(e.target.value)}/>
+                        <p>{lastNameError}</p>
                     </div>
                     <div className = "form-control">
                         <label>Username</label>
@@ -185,6 +198,7 @@ const Signup = ({ onBackClick, dayMode }) => {
                                 <Timer actionOnTimeUp = {removeUnverifiedUser} setInstructions = {setInstructions} extra = ""/>
                                 <label>6 digit verification code</label>
                                 <input type = "text" placeholder = "000000" value = {verifCode} onChange = {(e) => setVerifCode(e.target.value)}/>
+                                <p>{codeError}</p>
                             </div>
 
                             <h4 style = {{ textAlign : "center" }}>Didn't get an email? Click here to resend it:</h4>

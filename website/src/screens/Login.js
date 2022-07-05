@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { FaArrowLeft } from "react-icons/fa"
 
 import Button from "../components/Button"
@@ -8,17 +8,23 @@ const Login = ({ onBackClick, onSignUpClick, setProfile, dayMode }) => {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [usernameError, setUsernameError] = useState("")
+    const [passwordError, setPasswordError] = useState("")
+
+    useEffect(() => {
+        sessionStorage.setItem("page", "login")
+    })
 
     const onSubmit = (e) => {
         e.preventDefault()
 
         if (!username) {
-            alert("Please enter a username")
+            setUsernameError("Please enter a username")
             return
         }
         
         if (!password) {
-            alert("Please enter a password")
+            setPasswordError("Please enter a password")
             return
         }
 
@@ -45,10 +51,12 @@ const Login = ({ onBackClick, onSignUpClick, setProfile, dayMode }) => {
                 <div className = "form-control">
                     <label>Username</label>
                     <input type = "text" placeholder = "Username" value = {username} onChange = {(e) => setUsername(e.target.value)}/>
+                    <p>{usernameError}</p>
                 </div>
                 <div className = "form-control">
                     <label>Password</label>
                     <input type = "text" placeholder = "Password" value = {password} onChange = {(e) => setPassword(e.target.value)}/>
+                    <p>{passwordError}</p>
                 </div>
 
                 <input type = "submit" value = {submitLabel} className = {`btn btn-block ${dayMode ? "light-mode": ""}`} style = {{ cursor : "pointer" }}/>
