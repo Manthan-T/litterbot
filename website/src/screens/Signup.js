@@ -204,12 +204,12 @@ const Signup = ({ onBackClick, dayMode }) => {
                     </div>
                     <div className = "form-control">
                         <label>Password</label>
-                        <input type = "text" placeholder = "E.g. i3Rk^!$sfP05z" value = {password} onChange = {(e) => setPassword(e.target.value)}/>
+                        <input type = "password" placeholder = "E.g. i3Rk^!$sfP05z" value = {password} onChange = {(e) => setPassword(e.target.value)}/>
                         <p>{passwordError}</p>
                     </div>
                     <div className = "form-control">
                         <label>Confirm Password</label>
-                        <input type = "text" placeholder = "E.g. i3Rk^!$sfP05z" value = {confirmPassword} onChange = {(e) => setConfirmPassword(e.target.value)}/>
+                        <input type = "password" placeholder = "E.g. i3Rk^!$sfP05z" value = {confirmPassword} onChange = {(e) => setConfirmPassword(e.target.value)}/>
                         <p>{confirmPasswordError}</p>
                     </div>
                     <div className = "form-control">

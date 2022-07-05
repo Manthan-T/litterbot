@@ -55,7 +55,7 @@ const Login = ({ onBackClick, onSignUpClick, setProfile, dayMode }) => {
                 </div>
                 <div className = "form-control">
                     <label>Password</label>
-                    <input type = "text" placeholder = "Password" value = {password} onChange = {(e) => setPassword(e.target.value)}/>
+                    <input type = "password" placeholder = "Password" value = {password} onChange = {(e) => setPassword(e.target.value)}/>
                     <p>{passwordError}</p>
                 </div>
 
