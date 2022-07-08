@@ -5,7 +5,7 @@ import Timer from "./Timer"
 
 const Menu = ({ profile, dayMode }) => {
     const [position, setPosition] = useState(null)
-    const [reportCooldown, setReportCooldown] = useState(false)
+    const [reportCooldown, setReportCooldown] = useState(localStorage.getItem("reportCooldown" + profile) !== null ? localStorage.getItem("reportCooldown" + profile) : false)
 
     return (
         <>
@@ -42,7 +42,12 @@ const Menu = ({ profile, dayMode }) => {
                         </div>
                     </div>
                     
-                    {reportCooldown && (<Timer actionOnTimeUp = {() => setReportCooldown(false)} setInstructions = {(string) => {string = "i'm useless"}} extra = " on the report cooldown"/>)}
+                    {reportCooldown && (
+                        <Timer actionOnTimeUp = {() => {
+                            setReportCooldown(false)
+                            localStorage.setItem("reportCooldown" + profile, false)
+                        }} setInstructions = {(string) => {string = "i'm useless"}} extra = " on the report cooldown" timerNo = "1" profile = {profile}/>
+                    )}
                 </>
             )}
         </>

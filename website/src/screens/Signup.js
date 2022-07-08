@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react"
-import { FaArrowLeft, FaArrowCircleRight } from "react-icons/fa"
+import { FaArrowLeft, FaArrowCircleRight, FaAsterisk } from "react-icons/fa"
 
 import Timer from "../components/Timer"
 
@@ -25,18 +25,27 @@ const Signup = ({ onBackClick, dayMode }) => {
     const [phoneError, setPhoneError] = useState("")
     const [codeError, setCodeError] = useState("")
 
+    const [verifMode, setVerifMode] = useState(false)
+
     const removeUnverifiedUser = useCallback(() => {
         fetch(`/delete_user?username=${username}&password=${password}`)
     }, [username, password])
 
     useEffect(() => {
         sessionStorage.setItem("page", "signup")
+
         window.addEventListener("beforeunload", () => {
-            removeUnverifiedUser()
+            if (verifMode) {
+                removeUnverifiedUser()
+                console.log("hi")
+            }
         })
         return () => {
             window.removeEventListener("beforeunload", () => {
-                removeUnverifiedUser()
+                if (verifMode) {
+                    removeUnverifiedUser()
+                    console.log("hi")
+                }
             })
         }
     }, [removeUnverifiedUser])
@@ -88,7 +97,7 @@ const Signup = ({ onBackClick, dayMode }) => {
             return
         }
 
-        if (!(password.match(/[A-Z]/g) && password.match(/[a-z]/g) && password.match(/[0-9]/g) && password.match(/[!()\[\].?_-`~@#$^&*=+£]/g))) {
+        if (!(password.match(/[A-Z]/g) && password.match(/[a-z]/g) && password.match(/[0-9]/g) && password.match(/[!()[\].?_-`~@#$^&*=+£]/g))) {
             setFirstNameError("")
             setLastNameError("")
             setUsernameError("")
@@ -148,8 +157,6 @@ const Signup = ({ onBackClick, dayMode }) => {
         fetch(`/signup?first_name=${firstName}&last_name=${lastName}&username=${username}&password=${password}&email=${email}&phone=${phoneNumber}`)
             .then(res => res.json()).then(data => {
                 if (data.response !== "Accepted") {
-                    setSubmitLabel("Please try again")
-
                     switch (data.component) {
                         case "username":
                             setFirstNameError("")
@@ -207,6 +214,7 @@ const Signup = ({ onBackClick, dayMode }) => {
                     setPhoneError("")
                     setInstructions("Please check your email and enter the 6 digit verification code. You have 5 minutes or until you exit this page.")
                     setSubmitLabel("Check code")
+                    setVerifMode(true)
                 }
             }
         )
@@ -237,49 +245,51 @@ const Signup = ({ onBackClick, dayMode }) => {
         <>
             <div className = "bar" style = {{ marginTop : "5px" }}>
                 <FaArrowLeft onClick = {() => {
-                    if (instructions !== "Your account has been successfully created! Please go back and log in") {
+                    if (verifMode) {
                         removeUnverifiedUser()
+                        setVerifMode(false)
+                    } else {
+                        onBackClick()
                     }
-                    onBackClick()
                 }} size = "35px" cursor = "pointer"/>
                 <h1 style = {{ marginLeft : "-20px" }}>{instructions}</h1>
                 <p/>
             </div>
 
-            {instructions === "Please enter your details to sign up" ?
+            {verifMode ?
                 (<form className = "container" onSubmit = {onSubmitDetails}>
                     <div className = "form-control">
-                        <label>First name</label>
+                        <label>First name <FaAsterisk color = "#E02828" size = "7.5px" style = {{ marginBottom : "7.5px" }}/></label>
                         <input type = "text" placeholder = "E.g. Bob" value = {firstName} onChange = {(e) => setFirstName(e.target.value)}/>
                         <p>{firstNameError}</p>
                     </div>
                     <div className = "form-control">
-                        <label>Last name</label>
+                        <label>Last name <FaAsterisk color = "#E02828" size = "7.5px" style = {{ marginBottom : "7.5px" }}/></label>
                         <input type = "text" placeholder = "E.g. Smith" value = {lastName} onChange = {(e) => setLastName(e.target.value)}/>
                         <p>{lastNameError}</p>
                     </div>
                     <div className = "form-control">
-                        <label>Username</label>
+                        <label>Username <FaAsterisk color = "#E02828" size = "7.5px" style = {{ marginBottom : "7.5px" }}/></label>
                         <input type = "text" placeholder = "E.g. verysmart123" value = {username} onChange = {(e) => setUsername(e.target.value)}/>
                         <p>{usernameError}</p>
                     </div>
                     <div className = "form-control">
-                        <label>Password</label>
+                        <label>Password <FaAsterisk color = "#E02828" size = "7.5px" style = {{ marginBottom : "7.5px" }}/></label>
                         <input type = "password" placeholder = "E.g. i3Rk^!$sfP05z" value = {password} onChange = {(e) => setPassword(e.target.value)}/>
                         <p>{passwordError}</p>
                     </div>
                     <div className = "form-control">
-                        <label>Confirm Password</label>
+                        <label>Confirm Password <FaAsterisk color = "#E02828" size = "7.5px" style = {{ marginBottom : "7.5px" }}/></label>
                         <input type = "password" placeholder = "E.g. i3Rk^!$sfP05z" value = {confirmPassword} onChange = {(e) => setConfirmPassword(e.target.value)}/>
                         <p>{confirmPasswordError}</p>
                     </div>
                     <div className = "form-control">
-                        <label>Email address</label>
+                        <label>Email address <FaAsterisk color = "#E02828" size = "7.5px" style = {{ marginBottom : "7.5px" }}/></label>
                         <input type = "text" placeholder = "E.g. bobsmith123@gmail.com" value = {email} onChange = {(e) => setEmail(e.target.value)}/>
                         <p>{emailError}</p>
                     </div>
                     <div className = "form-control">
-                        <label>Phone number</label>
+                        <label>Phone number <FaAsterisk color = "#E02828" size = "7.5px" style = {{ marginBottom : "7.5px" }}/></label>
                         <input type = "text" placeholder = "E.g. 07962534676" value = {phoneNumber} onChange = {(e) => setPhoneNumber(e.target.value)}/>
                         <p>{phoneError}</p>
                     </div>
@@ -291,7 +301,7 @@ const Signup = ({ onBackClick, dayMode }) => {
                     {(instructions !== "You ran out of time. Please leave this page and come back." && instructions !== "Your account has been successfully created! Please go back and log in") &&
                         (<>
                             <div className = "form-control">
-                                <Timer actionOnTimeUp = {removeUnverifiedUser} setInstructions = {setInstructions} extra = ""/>
+                                <Timer actionOnTimeUp = {removeUnverifiedUser} setInstructions = {setInstructions} extra = "" timerNo = "2"/>
                                 <label>6 digit verification code</label>
                                 <input type = "text" placeholder = "000000" value = {verifCode} onChange = {(e) => setVerifCode(e.target.value)}/>
                                 <p>{codeError}</p>

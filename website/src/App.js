@@ -15,7 +15,6 @@ function App({ toggleLight }) {
             setProfile(localStorage.getItem("profile"))
         }
         setCurrentPage(sessionStorage.getItem("page"))
-        console.log(currentPage)
     })
     
     switch (currentPage) {

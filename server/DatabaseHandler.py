@@ -8,13 +8,13 @@ def alter_tables():
     cursor = conn.cursor()
     
     cursor.execute("""
-        DELETE FROM not_verified
+        DELETE FROM users
         WHERE userID = 2;
     """)
     conn.commit()
 
     conn.close()
-    
+
 @staticmethod
 def add_user(first_name, last_name, username, password, email_address, phone_number):
     conn = sql.connect("server/litterbot.db")

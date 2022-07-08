@@ -42,6 +42,7 @@ const Profile = ({ onBackClick, onLogout, username, dayMode }) => {
             if (data.response === "Done") {
                 onLogout()
                 onBackClick()
+                localStorage.removeItem("secsLeft" + profile)
             } else {
                 setDeleteButton("Incorrect password")
             }

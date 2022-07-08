@@ -12,19 +12,6 @@ def signup_verif(name, email):
     receiver = email
     
     message = """\
-    Dear {recipient},
-
-    Welcome to the Litterbot Reporting System!
-    In order to complete your account creation, please enter this code where prompted:
-    {code}
-    The code above will expire after five minutes.
-
-    Thank you for signing up!
-
-    (If you have not signed up and have received this message in error, please ignore or delete this message)
-    """.format(recipient = name, code = code)
-
-    html = """\
         <html>
         <head/>
         <body>
@@ -49,7 +36,7 @@ def signup_verif(name, email):
     yag.send(
         to = receiver,
         subject = "Litterbot Reporting System: Account Creation",
-        contents = html,
+        contents = message,
     )
 
     return code
