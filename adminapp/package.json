@@ -22,12 +22,7 @@
       "packagerConfig": {},
       "makers": [
         {
-          "name": "@electron-forge/maker-flatpak",
-          "config": {
-            "options": {
-              "categories": ["Productivity"]
-            }
-          }
+          "name": "@electron-forge/maker-zip"
         }
       ]
     }
@@ -37,7 +32,8 @@
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.64",
-    "@electron-forge/maker-flatpak": "^6.0.0-beta.64",
-    "electron": "19.0.8"
+    "@electron-forge/maker-zip": "^6.0.0-beta.64",
+    "electron": "19.0.8",
+    "electron-reloader": "^1.2.3"
   }
 }
