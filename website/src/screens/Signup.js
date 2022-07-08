@@ -33,22 +33,7 @@ const Signup = ({ onBackClick, dayMode }) => {
 
     useEffect(() => {
         sessionStorage.setItem("page", "signup")
-
-        window.addEventListener("beforeunload", () => {
-            if (verifMode) {
-                removeUnverifiedUser()
-                console.log("hi")
-            }
-        })
-        return () => {
-            window.removeEventListener("beforeunload", () => {
-                if (verifMode) {
-                    removeUnverifiedUser()
-                    console.log("hi")
-                }
-            })
-        }
-    }, [removeUnverifiedUser])
+    })
 
     const onSubmitDetails = (e) => {
         e.preventDefault()

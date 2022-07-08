@@ -4,8 +4,13 @@ import Button from "./Button"
 import Timer from "./Timer"
 
 const Menu = ({ profile, dayMode }) => {
+    const prepCooldown = () => {
+        localStorage.setItem("reportCooldown" + profile, false)
+        return false
+    }
+
     const [position, setPosition] = useState(null)
-    const [reportCooldown, setReportCooldown] = useState(localStorage.getItem("reportCooldown" + profile) !== null ? localStorage.getItem("reportCooldown" + profile) : false)
+    const [reportCooldown, setReportCooldown] = useState(localStorage.getItem("reportCooldown" + profile) !== null ? localStorage.getItem("reportCooldown" + profile) : prepCooldown())
 
     return (
         <>
