@@ -1,16 +1,20 @@
+# Import the random and yagmail libraries
 import random
 import yagmail
 
+# A static method used to verify a user attempting to sign up
 @staticmethod
 def signup_verif(name, email):
+    # Creates a 6 digit code by choosing a random number between 0 and 999999 inclusive
+    # It then converts this number into a string
+    # If the code is less than 6 digits long, it adds 0s to the front until the code is 6 digits long
     code = str(random.randint(0, 999999))
     if len(code) < 6:
         zeroes_left = 6 - len(code)
         for zero in range(0, zeroes_left):
             code = "0" + code
 
-    receiver = email
-    
+    # Creates a HTML styled email; inline CSS code is used to specify how the email will be presented. "<br>" is for starting a new line.
     message = """\
         <html>
         <head/>
@@ -32,11 +36,20 @@ def signup_verif(name, email):
         </html>
     """.format(recipient = name, code = code)
 
-    yag = yagmail.SMTP("thequintuscult@gmail.com", "hplgipblvcownmbm")
+    # Login to the email account using a secure app password provided by google stored in a .env file
+    # The .env file has been removed from this repository, but you can try this using your own email
+    # and app password (which you can create at myaccount.google.com -> Security -> Signing in to google -> App Passwords
+    # Then, click "Select app", click "Other (custom name)", enter whatever name you want, and then click "GENERATE".
+    # Enter the code provided in the place of "app_password.read()" and your email in place of "thequintuscult@gmail.com").
+    with open("emailpassword.env", "r") as app_password:
+        yag = yagmail.SMTP("thequintuscult@gmail.com", app_password.read())
+    
+    # Sends the email to the user attempting to signup
     yag.send(
-        to = receiver,
+        to = email,
         subject = "Litterbot Reporting System: Account Creation",
-        contents = message,
+        contents = message
     )
 
+    # Return the verification code
     return code
