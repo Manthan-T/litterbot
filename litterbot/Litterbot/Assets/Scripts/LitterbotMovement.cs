@@ -34,7 +34,7 @@ public class LitterbotMovement : MonoBehaviour {
 
         if (junctionLocations.Length != 0) {
             foreach (Transform junctionLocation in junctionLocations) {
-                if (transform.position + new Vector3(0.1f, 0.1f, 0.1f) >= junctionLocation.position && transform.position - new Vector3(0.1f, 0.1f, 0.1f) <= junctionLocation.position) {
+                if (Vector3.Distance <= ) {
 
                 }                
             }
