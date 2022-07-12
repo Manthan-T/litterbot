@@ -10,8 +10,12 @@ ws.flask_thread.start()
 # Start websocket server (for communication with admin app)
 wss.websocket_thread.start()
 
+input()
+
+wss.websocket_thread.broadcast("hi")
+
 try:
-    input("") # Close everything if enter is pressed
+    input() # Close everything if enter is pressed
 except KeyboardInterrupt: # Close everything if Ctrl+C is pressed
     pass
 

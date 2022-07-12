@@ -1,55 +1,58 @@
-// Default Electron code
-
-const { app, BrowserWindow } = require('electron');
+// Import electron modules
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
-// eslint-disable-next-line global-require
-if (require('electron-squirrel-startup')) {
-  app.quit();
-}
+// The ws library is a simple, easy-to-use websocket client
+const WebSocket = require("ws");
 
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1300,
-    height: 830,
+    width: 1300, // Width
+    height: 830, // Height
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, 'preload.js'), // Preload script for exposing communication methods
     },
-    icon: path.join(__dirname, 'favicon.png'),
-    autoHideMenuBar: true
+    icon: path.join(__dirname, 'favicon.png'), // Icon
+    autoHideMenuBar: true // Don't show "File", "Edit", etc. menus
   });
 
-  // and load the index.html of the app.
+  // Load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 };
 
+
+app.on('window-all-closed', () => {
+  app.quit();
+});
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.whenReady().then(() => {
+  // Handle one-way requests from front app
+  ipcMain.on('create-websocket', handleCreateWebsocket)
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  // Handle response requests from front app
+  ipcMain.handle('server:getBots', handleGetBots)
+
+  // Create window
+  createWindow()
 });
 
-app.on('activate', () => {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
-});
 
+let botlist = [] // List of bot IDs from server
+
+function handleCreateWebsocket(event, ip, port) {
+  // Create the websocket
+  ws = new WebSocket('ws://' + ip + ':' + port)
+
+  // Create a handler for all received messages from the server
+  ws.on('message', function(data, isBinary) {
+    console.log(data.toString())
+  })
+}
 
 // Handle requests to communicate with server
-
 async function handleGetBots() {
-  
+
 }
