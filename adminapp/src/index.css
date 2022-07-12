@@ -17,7 +17,7 @@ body {
   color: #30323D;
 }
 
-.startpage {
+#startpage {
   display: grid;
   place-items: center;
 }
