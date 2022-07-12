@@ -10,7 +10,7 @@ public class LitterbotMovement : MonoBehaviour {
 
     Vector3 start;
     Vector3 destination;
-    bool endReached = false;
+    bool onReturn = false;
 
     [SerializeField] Transform destinationObject;
     [SerializeField] Transform[] junctionLocations;
@@ -34,8 +34,8 @@ public class LitterbotMovement : MonoBehaviour {
 
         if (junctionLocations.Length != 0) {
             foreach (Transform junctionLocation in junctionLocations) {
-                if (Vector3.Distance <= ) {
-
+                if (Vector3.Distance(transform.position, junctionLocation.position) <= 0.1) {
+                    Turn(endjunctionTurnAngles[junctionLocations.IndexOf(junctionLocation)]);
                 }                
             }
         }

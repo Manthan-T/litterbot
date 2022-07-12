@@ -230,12 +230,9 @@ const Signup = ({ onBackClick, dayMode }) => {
         <>
             <div className = "bar" style = {{ marginTop : "5px" }}>
                 <FaArrowLeft onClick = {() => {
-                    if (verifMode) {
                         removeUnverifiedUser()
                         setVerifMode(false)
-                    } else {
                         onBackClick()
-                    }
                 }} size = "35px" cursor = "pointer"/>
                 <h1 style = {{ marginLeft : "-20px" }}>{instructions}</h1>
                 <p/>

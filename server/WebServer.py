@@ -169,7 +169,6 @@ def submit_report():
     
     # Update the number of reports the user has submitted
     update_report_count(username)
-    #TODO deal with me
 
     # Notify that the response has been received
     return {"response" : "Submitted"}

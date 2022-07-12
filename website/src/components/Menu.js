@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import Button from "./Button"
 import Timer from "./Timer"
@@ -11,6 +11,16 @@ const Menu = ({ profile, dayMode }) => {
 
     const [position, setPosition] = useState(null)
     const [reportCooldown, setReportCooldown] = useState(localStorage.getItem("reportCooldown" + profile) !== null ? localStorage.getItem("reportCooldown" + profile) : prepCooldown())
+    
+    useEffect(() => {
+        window.navigator.geolocation.getCurrentPosition(setPosition, () => {
+            navigator.permissions.query({ name : "geolocation" }).then(result => {
+                if (result.state !== "granted") {
+                    alert("You cannot submit a report without enabling location permissions")
+                }
+            })
+        })        
+    })
 
     return (
         <>
