@@ -1,4 +1,5 @@
 server/emailpassword.env
+server/litterbot.db
 litterbot/Litterbot/Library
 litterbot/Litterbot/Logs
 litterbot/Litterbot/ProjectSettings
