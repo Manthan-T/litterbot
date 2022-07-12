@@ -4,6 +4,7 @@
   --light: #F7F1F8;
   --shade: #494B5B;
   --dark: #30323D;
+  --darker: #24252E;
   --accent1: #5C80BC;
   --accent2: #E3F3CE;
 }
@@ -64,5 +65,7 @@ body {
 }
 
 header {
-  background-color: var(--shade);
+  background: var(--darker);
+  display: grid;
+  place-items: center;
 }

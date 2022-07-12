@@ -46,3 +46,10 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+
+// Handle requests to communicate with server
+
+async function handleGetBots() {
+  
+}

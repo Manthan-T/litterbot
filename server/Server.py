@@ -1,2 +1,4 @@
-# Import and start the server for reporting
+# Import and start the backend server
 import WebServer as ws
+
+ws.flask_thread.start()
