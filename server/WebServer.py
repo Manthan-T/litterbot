@@ -1,5 +1,6 @@
 # Import Flask, a tool used to create web APIs
 from flask import Flask, request
+from threading import Thread
 
 # Import the database handling functions and the mail sending function
 from DatabaseHandler import *
@@ -173,5 +174,15 @@ def submit_report():
     # Notify that the response has been received
     return {"response" : "Submitted"}
 
-# Run the flask app
-app.run()
+# Run the flask app in a thread
+kwargs = {
+    "host": "127.0.0.1",
+    "port": 5000,
+    "threaded": True,
+    "use_reloader": False,
+    "debug": False
+}
+
+flask_thread = Thread(target=app.run, daemon=True, kwargs=kwargs)
+
+# This thread is started in Server.py

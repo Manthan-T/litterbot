@@ -12,11 +12,13 @@ if (require('electron-squirrel-startup')) {
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1300,
+    height: 830,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
+    icon: path.join(__dirname, 'favicon.png'),
+    autoHideMenuBar: true
   });
 
   // and load the index.html of the app.
@@ -45,10 +47,9 @@ app.on('activate', () => {
   }
 });
 
-// App code
 
+// Handle requests to communicate with server
 
-// Setup hot reloading for easy editing
-try {
-    require('electron-reloader')(module)
-} catch (_) {}
+async function handleGetBots() {
+  
+}
