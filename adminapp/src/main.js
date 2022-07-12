@@ -1,6 +1,7 @@
 // Import electron modules
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+const { electron } = require('process');
 
 // The ws library is a simple, easy-to-use websocket client
 const WebSocket = require("ws");
@@ -30,29 +31,48 @@ app.on('window-all-closed', () => {
 // initialization and is ready to create browser windows.
 app.whenReady().then(() => {
   // Handle one-way requests from front app
-  ipcMain.on('create-websocket', handleCreateWebsocket)
+  ipcMain.on('create-websocket', handleCreateWebsocket);
 
   // Handle response requests from front app
-  ipcMain.handle('server:getBots', handleGetBots)
+  ipcMain.handle('server:getBots', handleGetBots);
 
   // Create window
-  createWindow()
+  createWindow();
 });
 
 
-let botlist = [] // List of bot IDs from server
+let botlist = {
+  1: [27, 36],
+  2: [41, 21]
+} // List of bot locations from server
 
 function handleCreateWebsocket(event, ip, port) {
   // Create the websocket
-  ws = new WebSocket('ws://' + ip + ':' + port)
+  ws = new WebSocket('ws://' + ip + ':' + port);
 
   // Create a handler for all received messages from the server
   ws.on('message', function(data, isBinary) {
+    // Messages are formatted in parts separated by ; e.g. "botlist ; 1,18,27 ; 2,36,21"
+    // This example represents two robots at coordinates (18,27) and (36,21) with IDs 1 and 2
     console.log(data.toString())
+    message = data.toString().split(";");
+
+    // Choose a handler based on the message type
+    switch (message[0]) {
+      case "botlist": // If a bot list is provided
+        // Reset the list
+        botlist = {}
+        for (const robot of message.slice(1)) {
+          // Add each robot's position
+          botlist[robot.split(",")[0]] = robot.split(",").slice(1).map((x) => parseInt(x, 10))
+        }
+        break;
+    }
   })
+
 }
 
 // Handle requests to communicate with server
 async function handleGetBots() {
-
+  return botlist
 }

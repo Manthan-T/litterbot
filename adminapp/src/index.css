@@ -69,3 +69,9 @@ header {
   display: grid;
   place-items: center;
 }
+
+header .btn {
+  position: fixed;
+  right: 10px;
+  width: 100px;
+}
