@@ -17,7 +17,8 @@ const createWindow = () => {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
-    icon: path.join(__dirname, 'favicon.png')
+    icon: path.join(__dirname, 'favicon.png'),
+    autoHideMenuBar: true
   });
 
   // and load the index.html of the app.
@@ -45,13 +46,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-// App code
-
-
-// Setup hot reloading for easy editing
-try {
-    require('electron-reloader')(module)
-} catch (_) {}
-
-
