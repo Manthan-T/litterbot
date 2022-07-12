@@ -1,6 +1,8 @@
 # Import Flask, a tool used to create web APIs
 from flask import Flask, request
-from threading import Thread
+
+# Import Threading so that the multiple server components can be run at once
+from threading import Thread    
 
 # Import the database handling functions and the mail sending function
 from DatabaseHandler import *
@@ -180,9 +182,9 @@ kwargs = {
     "port": 5000,
     "threaded": True,
     "use_reloader": False,
-    "debug": False
+    "debug": False,
 }
 
-flask_thread = Thread(target=app.run, daemon=True, kwargs=kwargs)
+flask_thread = Thread(target=app.run, daemon=True, kwargs=kwargs, name="Webserver Thread")
 
 # This thread is started in Server.py
