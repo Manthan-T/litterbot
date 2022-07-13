@@ -743,6 +743,9 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194231}
+  - component: {fileID: 963194230}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -816,6 +819,60 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64875cfea3598b9419edac2dbbce0413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  streamingSize: {x: 1280, y: 720}
+  depth: 0
+  antiAliasing: 1
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2307e7ad91222841b562bebd81a69a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  streams:
+  - {fileID: 963194229}
+--- !u!114 &963194231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 045786cf504bd7347842d6948241cbd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  urlSignaling: ws://localhost
+  signalingType: Unity.RenderStreaming.Signaling.WebSocketSignaling
+  iceServers:
+  - credential: 
+    credentialType: 0
+    urls:
+    - stun:stun.l.google.com:19302
+    username: 
+  interval: 5
+  hardwareEncoderSupport: 1
+  handlers:
+  - {fileID: 963194230}
+  runOnAwake: 1
 --- !u!1 &1072698433
 GameObject:
   m_ObjectHideFlags: 0

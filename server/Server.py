@@ -1,5 +1,3 @@
-import asyncio
-
 # Import and start the backend server
 import WebServer as ws
 import WebSocketServer as wss
