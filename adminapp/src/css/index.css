@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+@import 'botpage.css';
+@import 'startpage.css';
 
 :root {
   --light: #F7F1F8;
@@ -57,21 +59,4 @@ body {
 
 .btn:active {
   transform: scale(0.98);
-}
-
-#startpage {
-  display: grid;
-  place-items: center;
-}
-
-header {
-  background: var(--darker);
-  display: grid;
-  place-items: center;
-}
-
-header .btn {
-  position: fixed;
-  right: 10px;
-  width: 100px;
 }

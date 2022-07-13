@@ -4,7 +4,7 @@ const path = require('path');
 const { electron } = require('process');
 
 // The ws library is a simple, easy-to-use websocket client
-const WebSocket = require("ws");
+const WebSocket = require('ws');
 
 const createWindow = () => {
   // Create the browser window.
@@ -12,10 +12,10 @@ const createWindow = () => {
     width: 1300, // Width
     height: 830, // Height
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'), // Preload script for exposing communication methods
+      preload: path.join(__dirname, 'js/preload.js'), // Preload script for exposing communication methods
     },
-    icon: path.join(__dirname, 'favicon.png'), // Icon
-    autoHideMenuBar: true // Don't show "File", "Edit", etc. menus
+    icon: path.join(__dirname, 'resources/favicon.png'), // Icon
+    autoHideMenuBar: true // Don't show 'File', 'Edit', etc. menus
   });
 
   // Load the index.html of the app.
@@ -52,24 +52,23 @@ function handleCreateWebsocket(event, ip, port) {
 
   // Create a handler for all received messages from the server
   ws.on('message', function(data, isBinary) {
-    // Messages are formatted in parts separated by ; e.g. "botlist ; 1,18,27 ; 2,36,21"
+    // Messages are formatted in parts separated by ; e.g. 'botlist ; 1,18,27 ; 2,36,21'
     // This example represents two robots at coordinates (18,27) and (36,21) with IDs 1 and 2
     console.log(data.toString())
-    message = data.toString().split(";");
+    message = data.toString().split(';');
 
     // Choose a handler based on the message type
     switch (message[0]) {
-      case "botlist": // If a bot list is provided
+      case 'botlist': // If a bot list is provided
         // Reset the list
         botlist = {}
         for (const robot of message.slice(1)) {
           // Add each robot's position
-          botlist[robot.split(",")[0]] = robot.split(",").slice(1).map((x) => parseInt(x, 10))
+          botlist[robot.split(',')[0]] = robot.split(',').slice(1).map((x) => parseInt(x, 10))
         }
         break;
     }
   })
-
 }
 
 // Handle requests to communicate with server
