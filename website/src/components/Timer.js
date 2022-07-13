@@ -37,4 +37,5 @@ const Timer = ({ actionOnTimeUp, setInstructions, extra, timerNo, profile }) => 
     )
 }
 
+// Allow the Timer component to be used by another component
 export default Timer

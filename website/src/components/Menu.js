@@ -69,4 +69,5 @@ const Menu = ({ profile, dayMode }) => {
     )
 }
 
+// Allow the Menu component to be used by another component
 export default Menu

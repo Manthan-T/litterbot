@@ -50,11 +50,23 @@ def signup():
                 "component" : "username",
                 "response" : "This username is shorter than 5 characters. Please try a longer username."
                }
+    
+    if username.find(" "):
+        return {
+                "component" : "username",
+                "response" : "This username has a space. Please remove any spaces."
+               }
 
     if len(password) < 8:
         return {
                 "component" : "password",
                 "response" : "This password is shorter than 8 characters. Please try a longer password."
+               }
+    
+    if password.find(" "):
+        return {
+                "component" : "password",
+                "response" : "This password has a space. Please remove any spaces."
                }
 
     if not check_username_copies(username):

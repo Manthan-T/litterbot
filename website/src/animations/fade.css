@@ -1,7 +1,9 @@
+/* A fade in animation, lasting 0.15 seconds */
 .fade-in {
   animation: fade-in 0.15s
 }
 
+/* It goes from 0 opacity at the start to 1 opacity (completely opaque) at the end of the animation. This happens evenly. */
 @keyframes fade-in {
     0%   { opacity: 0 }
     100% { opacity: 1 }

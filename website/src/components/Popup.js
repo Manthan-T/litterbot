@@ -19,4 +19,5 @@ const Popup = ({ title, content, handleClose, animation, dayMode}) => {
     )
 }
 
+// Allow the Popup component to be used by another component
 export default Popup
