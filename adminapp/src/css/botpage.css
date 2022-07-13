@@ -1,0 +1,73 @@
+#botspage {
+  display: grid;
+  place-items: center;
+}
+
+#botspage header .btn { 
+  position: fixed;
+  right: 10px;
+  width: 100px;
+}
+
+ol {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    list-style-type: none;
+}
+
+.bot div {
+  border-radius: 7px;
+  background: var(--darker);
+  place-content: center;
+  margin: 50px;
+  filter: drop-shadow(2px 4px 6px var(--shade));
+  width: 250px;
+  height: 300px;
+  display: grid; 
+  grid-template-columns: 1fr; 
+  grid-template-rows: 225px 75px; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    'Map'
+    'Name'; 
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.bot div:hover {
+  width: 270px;
+  height: 320px;
+  margin: 30px;
+  filter: drop-shadow(2px 4px 6px var(--accent1));
+  grid-template-columns: 1fr; 
+  grid-template-rows: 240px 80px; 
+}
+
+.bot div img {
+  border-radius: 7px 7px 0px 0px;
+  width: 250px;
+  height: 225px;
+  grid-area: Map;
+  transition: 0.3s;
+}
+
+.bot div:hover img {
+  border-radius: 7px 7px 0px 0px;
+  width: 270px;
+  height: 240px;
+  grid-area: Map;
+  
+}
+
+.bot div p {
+  display: grid;
+  place-items: center;
+  grid-area: Name;
+  transition: 0.3s;
+}
+
+.bot div:hover p {
+  display: grid;
+  place-items: center;
+  grid-area: Name;
+}

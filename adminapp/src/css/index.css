@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+@import 'botpage.css';
+@import 'startpage.css';
+@import 'detailspage.css';
 
 :root {
   --light: #F7F1F8;
@@ -19,6 +22,13 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: var(--dark);
   color: var(--light)
+}
+
+header {
+  background: var(--darker);
+  display: grid;
+  place-items: center;
+  padding: 5px;
 }
 
 .light-mode {
@@ -57,15 +67,4 @@ body {
 
 .btn:active {
   transform: scale(0.98);
-}
-
-#startpage {
-  display: grid;
-  place-items: center;
-}
-
-header {
-  background: var(--darker);
-  display: grid;
-  place-items: center;
 }

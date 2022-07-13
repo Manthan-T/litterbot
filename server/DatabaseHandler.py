@@ -7,7 +7,7 @@ from MailSender import *
 
 # For development purposes only (ignore this method)
 def alter_tables():
-    conn = sql.connect("server/litterbot.db")
+    conn = sql.connect("./litterbot.db")
     cursor = conn.cursor()
     
     cursor.execute("""
@@ -33,7 +33,7 @@ def alter_tables():
 # A static method to add a user to the database; specifically to the "users" and "not_verified" tables
 @staticmethod
 def add_user(first_name, last_name, username, password, email_address, phone_number):
-    conn = sql.connect("server/litterbot.db")
+    conn = sql.connect("./litterbot.db")
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -90,7 +90,7 @@ def add_user(first_name, last_name, username, password, email_address, phone_num
 # A static method to delete an unverified user from both tables of the database
 @staticmethod
 def delete_user(username, password):
-    conn = sql.connect("server/litterbot.db")
+    conn = sql.connect("./litterbot.db")
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -121,7 +121,7 @@ def delete_user(username, password):
 # A static method to delete a verified user from the "users" table
 @staticmethod
 def delete_account_db(username, password):
-    conn = sql.connect("server/litterbot.db")
+    conn = sql.connect("./litterbot.db")
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -146,7 +146,7 @@ def delete_account_db(username, password):
 # A static method to get all information about a user
 @staticmethod
 def get_user(username):
-    conn = sql.connect("server/litterbot.db")
+    conn = sql.connect("./litterbot.db")
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -161,7 +161,7 @@ def get_user(username):
 # A static method to check whether a username has already been taken
 @staticmethod
 def check_username_copies(username):
-    conn = sql.connect("server/litterbot.db")
+    conn = sql.connect("./litterbot.db")
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -181,7 +181,7 @@ def check_username_copies(username):
 # A static method to check whether a password has already been taken
 @staticmethod
 def check_password_copies(password):
-    conn = sql.connect("server/litterbot.db")
+    conn = sql.connect("./litterbot.db")
     cursor = conn.cursor()
     
     cursor.execute("""
@@ -201,7 +201,7 @@ def check_password_copies(password):
 # A static method to check whether a user exists (this is used to log in)
 @staticmethod
 def user_exists(username, password):
-    conn = sql.connect("server/litterbot.db")
+    conn = sql.connect("./litterbot.db")
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -221,7 +221,7 @@ def user_exists(username, password):
 # A static method to check whether verify an entered verification code and if the code is correct, remove the user from the "not_verified" table
 @staticmethod
 def verify_user(username, code):
-    conn = sql.connect("server/litterbot.db")
+    conn = sql.connect("./litterbot.db")
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -257,7 +257,7 @@ def verify_user(username, code):
 # A static method to create a new verification code and update it for the (potential) user that requested a new one
 @staticmethod
 def update_verif_code(username, code):
-    conn = sql.connect("server/litterbot.db")
+    conn = sql.connect("./litterbot.db")
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -283,7 +283,7 @@ def update_verif_code(username, code):
 # A static method to update the number of reports a user has sent
 @staticmethod
 def update_report_count(username):
-    conn = sql.connect("server/litterbot.db")
+    conn = sql.connect("./litterbot.db")
     cursor = conn.cursor()
 
     cursor.execute("""

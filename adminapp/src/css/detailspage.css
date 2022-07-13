@@ -1,0 +1,41 @@
+#detailspage header .btn {
+    display: grid;
+    place-items: center;
+}
+
+#detailspage header .btn {
+    position: fixed;
+    left: 10px;
+    width: 100px;
+}
+
+#details {
+    background: var(--shade);
+    border-radius: 20px;
+    margin: 40px 70px 150px 70px;
+    padding: 20px;
+    size: auto;
+    display: grid; 
+    grid-auto-flow: column; 
+    grid-auto-rows: 1fr; 
+    grid-template-columns: 33% 66%; 
+    gap: 0px 0px; 
+    grid-template-areas: "Details Map"
+  }
+
+#textdetails {
+    grid-area: Details;
+}
+
+#largemap {
+    grid-area: Map;
+    size: auto;
+}
+
+#largemap img {
+    border-radius: 15px;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+  
