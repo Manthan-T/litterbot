@@ -1,3 +1,14 @@
+#botspage {
+  display: grid;
+  place-items: center;
+}
+
+#botspage header .btn { 
+  position: fixed;
+  right: 10px;
+  width: 100px;
+}
+
 ol {
     display: grid;
     grid-template-columns: repeat(auto-fill, 300px);
@@ -17,8 +28,9 @@ ol {
   grid-template-rows: 225px 75px; 
   gap: 0px 0px; 
   grid-template-areas: 
-    'a'
-    'b'; 
+    'Map'
+    'Name'; 
+  cursor: pointer;
   transition: 0.3s;
 }
 
@@ -35,7 +47,7 @@ ol {
   border-radius: 7px 7px 0px 0px;
   width: 250px;
   height: 225px;
-  grid-area: a;
+  grid-area: Map;
   transition: 0.3s;
 }
 
@@ -43,19 +55,19 @@ ol {
   border-radius: 7px 7px 0px 0px;
   width: 270px;
   height: 240px;
-  grid-area: a;
+  grid-area: Map;
   
 }
 
 .bot div p {
   display: grid;
   place-items: center;
-  grid-area: b;
+  grid-area: Name;
   transition: 0.3s;
 }
 
 .bot div:hover p {
   display: grid;
   place-items: center;
-  grid-area: b;
+  grid-area: Name;
 }

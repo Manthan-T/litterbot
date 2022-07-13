@@ -13,18 +13,42 @@
       <h1>Welcome to the remote control system for all connected Litterbots.</h1>
       <h2>Please press start to begin!</h2>
       <br>
-      <button class="btn", id="startbtn">Start</button>
+      <button class="btn" id="startbtn" onclick="start()">Start</button>
+      <script src="js/startpage.js"></script>
     </div>
 
-    <div id="botspage", style="display: none;">
+    <div id="botspage" style="display: none;">
       <header>
         <h1>Connected Bots</h1>
-        <button class="btn" id="reloadbtn">Reload</button>
+        <button class="btn" id="reloadbtn" onclick="reload()">Reload</button>
       </header>
       <ol id="botlist">
       </ol>
+      <script src="js/botspage.js"></script>
     </div>
 
-    <script src="js/app.js"></script>
+    <div id="detailspage" style="display: none;">
+      <header>
+        <button class="btn" id="backbtn" onclick="back()">Back</button>
+        <h1 id="botname"></h1>
+      </header>
+      <div id="details">
+        <div id="textdetails">
+          <p><b>Name: </b><span id="name"></span></p>
+          <br>
+          <p><b>ID: </b><span id="botid"></p>
+          <br>
+          <p><b>Uptime: </b><span id="uptime"></p>
+          <br>
+          <p><b>Litter: </b><span id="litter"></p>
+          <br>
+          <p><b>Coordinates: </b><span id="coords"></p>
+        </div>  
+        <div id="largemap">
+          <img src="resources/Screenshot from 2022-07-13 01-31-03.png"/>
+        </div>
+      </div>
+      <script src="js/detailspage.js"></script>
+    </div>
   </body>
 </html>

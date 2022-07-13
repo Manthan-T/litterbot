@@ -1,16 +1,4 @@
 #startpage {
-    display: grid;
-    place-items: center;
-  }
-  
-  header {
-    background: var(--darker);
-    display: grid;
-    place-items: center;
-  }
-  
-  header .btn {
-    position: fixed;
-    right: 10px;
-    width: 100px;
-  }
+  display: grid;
+  place-items: center;
+}
