@@ -16,7 +16,6 @@ function reload() {
         for (const botid in bots) {
             // Create a list element for the bot
             botelement = document.createElement('li');
-            botelement.className = 'bot';
 
             // Add a div for styling to the list element
             botdiv = document.createElement('div');

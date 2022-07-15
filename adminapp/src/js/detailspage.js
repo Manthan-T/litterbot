@@ -12,5 +12,6 @@ function getData() {
         document.getElementById("uptime").innerText = data.uptime;
         document.getElementById("litter").innerText = data.litter;
         document.getElementById("coordinates").innerText = data.coordinates;
+        document.getElementById("destination").innerText = data.coordinates;
     })
 }

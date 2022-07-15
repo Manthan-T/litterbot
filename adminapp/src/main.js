@@ -32,9 +32,12 @@ app.on('window-all-closed', () => {
 app.whenReady().then(() => {
   // Handle one-way requests from front app
   ipcMain.on('create-websocket', handleCreateWebsocket);
+  ipcMain.on('focus-bot', handleFocusBot);
+  ipcMain.on('stop-focus-bot', handleStopFocusBot);
 
   // Handle response requests from front app
   ipcMain.handle('server:getBots', handleGetBots);
+  ipcMain.handle('server:getFocusedBotDetails', handleGetFocusedBotDetails);
 
   // Create window
   createWindow();
@@ -71,7 +74,20 @@ function handleCreateWebsocket(event, ip, port) {
   })
 }
 
+function handleFocusBot() {
+
+}
+
+function handleStopFocusBot() {
+
+}
+
+
 // Handle requests to communicate with server
 async function handleGetBots() {
   return botlist
+}
+
+async function handleGetFocusedBotDetails() {
+
 }
