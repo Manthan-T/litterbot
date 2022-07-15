@@ -126,7 +126,7 @@ public class LitterbotNavigation : MonoBehaviour {
                 } else {
                     Debug.DrawRay(start, dir * hit.distance, Color.yellow);
                 }
-            // If no object cannot be picked up, draw a red ray for debugging purposes.
+            // If no object is detected, draw a red ray for debugging purposes.
             } else {
                 Debug.DrawRay(start, dir * 2, Color.red);
             }
