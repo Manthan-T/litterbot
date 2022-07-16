@@ -40,7 +40,8 @@ def signup_verif(name, email):
     # The .env file has been removed from this repository, but you can try this using your own email
     # and app password (which you can create at myaccount.google.com -> Security -> Signing in to google -> App Passwords
     # Then, click "Select app", click "Other (custom name)", enter whatever name you want, and then click "GENERATE".
-    # Enter the code provided in the place of "app_password.read()" and your email in place of "thequintuscult@gmail.com").
+    # Create your own "emailpassword.env" in the same directory as the server. Set the first line as the email and the second as
+    # the app password.
     with open("emailpassword.env", "r") as app_password:
         yag = yagmail.SMTP(app_password.readline(), app_password.readline())
     

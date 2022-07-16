@@ -17,7 +17,7 @@ def alter_tables():
     conn.commit()
 
     conn.close()
-alter_tables()
+
 # In all of these methods, the first couple of lines are for connecting to the database and bringing the cursor to it.
 # The cursor executes various SQL query using "cursor.execute("[string query]")", and if the query changes a
 # table in any way (eg, adds to it or updates a value), the change needs to be commited using "conn.commit()" immediately
@@ -46,7 +46,8 @@ def add_user(first_name, last_name, username, password, email_address, phone_num
             "{password}",
             "{email_address}",
             "{phone_number}",
-            "{date}"
+            "{date}",
+            null
         )
     """.format(
         first_name = first_name,
