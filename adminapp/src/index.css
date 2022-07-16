@@ -1,0 +1,163 @@
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLDz8V1s.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrFJA.ttf) format('truetype');
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: 0.1s;
+}
+* body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #30323D;
+  color: #F7F1F8;
+}
+* body header {
+  background-color: #24252E;
+  display: grid;
+  place-items: center;
+  padding: 5px;
+}
+* body button {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
+  background-color: #F7F1F8;
+  color: #30323D;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 15px;
+  font-family: inherit;
+}
+* body button:focus {
+  outline: none;
+}
+* body button:active {
+  transform: scale(0.98);
+}
+* body .lighticon {
+  position: fixed;
+  margin: 5px;
+  left: 10px;
+  top: 10px;
+}
+* body .lighticon path {
+  d: path('M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z');
+  transition: 0s;
+}
+* body > div {
+  display: grid;
+  place-items: center;
+}
+* body #botspage header button {
+  position: fixed;
+  right: 10px;
+  width: 100px;
+}
+* body #botspage ol {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  place-items: center;
+  list-style-type: none;
+}
+* body #botspage ol li div {
+  background-color: #24252E;
+  border-radius: 7px;
+  place-content: center;
+  width: 250px;
+  height: 300px;
+  margin: 50px;
+  filter: drop-shadow(2px 4px 6px #494B5B);
+  display: grid;
+  grid-template: 'Map' 225px 'Name' 75px / 1fr;
+  cursor: pointer;
+  transition: 0.3s;
+}
+* body #botspage ol li div img {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  width: 250px;
+  height: 225px;
+  transition: inherit;
+  grid-area: Map;
+}
+* body #botspage ol li div p {
+  display: grid;
+  place-items: center;
+  transition: inherit;
+  grid-area: Name;
+}
+* body #botspage ol li div:hover {
+  width: 270px;
+  height: 320px;
+  margin: 30px;
+  filter: drop-shadow(2px 4px 6px #5C80BC);
+  grid-template: "Map" 240px "Name" 80px / 1fr;
+}
+* body #botspage ol li div:hover img {
+  width: 270px;
+  height: 240px;
+}
+* body #detailspage header button {
+  position: fixed;
+  left: 10px;
+  width: 100px;
+}
+* body #detailspage #details {
+  background-color: #494B5B;
+  border-radius: 20px;
+  margin: 40px 70px 150px 70px;
+  padding: 20px;
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-template-columns: 33% 66%;
+  grid-template-areas: "Details Map";
+}
+* body #detailspage #details #textdetails {
+  grid-area: Details;
+}
+* body #detailspage #details #largemap {
+  grid-area: Map;
+}
+* body #detailspage #details #largemap img {
+  border-radius: 15px;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+* body.light-mode {
+  background-color: #F7F1F8;
+  color: #30323D;
+}
+* body.light-mode header {
+  background-color: #C6E2E9;
+}
+* body.light-mode button {
+  background-color: #30323D;
+  color: #F7F1F8;
+}
+* body.light-mode .lighticon path {
+  d: path('M 6 0.278 a 0.768 0.768 0 0 1 0.08 0.858 a 7.208 7.208 0 0 0 -0.878 3.46 c 0 4.021 3.278 7.277 7.318 7.277 c 0.527 0 1.04 -0.055 1.533 -0.16 a 0.787 0.787 0 0 1 0.81 0.316 a 0.733 0.733 0 0 1 -0.031 0.893 A 8.349 8.349 0 0 1 8.344 16 C 3.734 16 0 12.286 0 7.71 C 0 4.266 2.114 1.312 5.124 0.06 A 0.752 0.752 0 0 1 6 0.278 Z');
+}
+* body.light-mode #botspage ol li div {
+  background-color: #C6E2E9;
+}
+* body.light-mode #botspage ol li div:hover {
+  filter: drop-shadow(2px 4px 6px #494B5B);
+}
+* body.light-mode #detailspage #details {
+  background-color: #C6E2E9;
+}

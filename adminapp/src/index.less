@@ -1,0 +1,346 @@
+// Import google "Poppins" font
+@import 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap';
+
+// Define colour palette of app
+@light: #F7F1F8;
+@shade: #494B5B;
+@dark: #30323D;
+@darker: #24252E;
+@accent1: #5C80BC;
+@accent2: #C6E2E9;
+
+// For all elements
+* {
+  // Set up default positioning
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  // Add slight animation on light mode transitions
+  transition: 0.1s;
+
+
+  body {
+    // Set the font
+    font-family: 'Poppins', sans-serif;
+
+    // Set default background and foreground colours
+    background-color: @dark;
+    color: @light;
+
+    // For all headers
+    header {
+      // Set background colour
+      background-color: @darker;
+
+      // Centre titles
+      display: grid;
+      place-items: center;
+
+      // Add padding around header content
+      padding: 5px;
+    }
+
+    // For all buttons
+    button {
+      // Set up display
+      display: inline-block;
+      padding: 10px 15px;
+      margin: 5px;
+
+      // Default background colours
+      background-color: @light;
+      color: @dark;
+
+      // Round button
+      border: none;
+      border-radius: 20px;
+
+      // Set mouse to click pointer when hovered
+      cursor: pointer;
+
+      // Set font sizes
+      text-decoration: none;
+      font-size: 15px;
+      font-family: inherit;
+
+
+      // When button is focused
+      &:focus {
+        // Remove outline
+        outline: none;
+      }
+
+
+      // When button is being clicked
+      &:active {
+        // Reduce the size slightly
+        transform: scale(0.98);
+      }
+    } // End button formatting
+
+
+    // For the day/night icon
+    .lighticon {
+      // Fix position in top left of screen
+      position: fixed;
+      margin: 5px;
+      left: 10px;
+      top: 10px;
+
+      // Set icon during dark mode
+      path {
+        d: path('M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z');
+
+        // Disable transition between paths
+        transition: 0s;
+      }
+    } // End day/night icon formatting
+
+
+    // For all pages in the app
+    >div {
+      display: grid;
+      place-items: center;
+    }
+
+
+    // Start Page
+    #startpage {}
+
+    // No specific formatting
+
+
+    // Bot list page
+    #botspage {
+
+      // For the reload button
+      header button {
+        // Fix position on right of header
+        position: fixed;
+        right: 10px;
+        width: 100px;
+      }
+
+
+      // For the bot list
+      ol {
+        // Configure list items to appear in a grid
+        display: grid;
+
+        // Dynamically change the column count
+        grid-template-columns: repeat(auto-fill, 300px);
+
+        // Centre cards in their grid boxes
+        place-items: center;
+
+        // Remove default bullet points
+        list-style-type: none;
+
+
+        // For the card in each list item
+        li div {
+          // Set background colour
+          background-color: @darker;
+
+          // Round the corner
+          border-radius: 7px;
+
+          // Centre content of box
+          place-content: center;
+
+          // Fix card size
+          width: 250px;
+          height: 300px;
+
+          // Push cards apart from each other
+          margin: 50px;
+
+          // Add a drop shadow
+          filter: drop-shadow(2px 4px 6px @shade);
+
+          // Set content display on each card
+          display: grid;
+          grid-template:
+            'Map' 225px // Larger top area
+            'Name' 75px / 1fr; // Smaller bottom area
+
+          // Set cursor to "click"
+          cursor: pointer;
+
+          // Add a transition for when card is hovered
+          transition: 0.3s;
+
+
+          // For the top part of the card
+          img {
+            // Round the top corners of the image
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+
+            // Set default image size
+            width: 250px;
+            height: 225px;
+
+            // Inherit slower transition
+            transition: inherit;
+
+            // Display in upper part of card
+            grid-area: Map;
+          }
+
+
+          // For the bottom part of the card
+          p {
+            // Centre text
+            display: grid;
+            place-items: center;
+
+            // Inherit slower transition
+            transition: inherit;
+
+            // Display in lower part of card
+            grid-area: Name;
+          }
+
+
+          // When card is hovered
+          &:hover {
+            // Increase size and decrease margin to compensate
+            width: 270px;
+            height: 320px;
+            margin: 30px;
+
+            // Change shadow accent colour
+            filter: drop-shadow(2px 4px 6px @accent1);
+
+            // Increase grid box sizes
+            grid-template:
+              "Map" 240px // Top part
+              "Name" 80px / 1fr; // Bottom part
+
+
+            // For the top part of the card 
+            img {
+              // Increase size
+              width: 270px;
+              height: 240px;
+            }
+          }
+        } // End bot card formatting
+      } // End bot list formatting
+    } // End bots page formatting
+
+
+    // Details Page
+    #detailspage {
+
+      // For the button in the header
+      header button {
+        // Fix position on left of header
+        position: fixed;
+        left: 10px;
+        width: 100px;
+      }
+
+
+      // For the background details box
+      #details {
+        // Set background colour
+        background-color: @shade;
+
+        // Round corners
+        border-radius: 20px;
+
+        // Push box away from edges
+        margin: 40px 70px 150px 70px;
+
+        // Push contents into box
+        padding: 20px;
+
+
+        // Set up boxes within details box
+        display: grid;
+        grid-auto-rows: 1fr;
+        grid-template-columns: 33% 66%;
+        grid-template-areas: "Details Map";
+
+
+        // For the text part of the details box
+        #textdetails {
+          // Associate it with the left grid area
+          grid-area: Details;
+        }
+
+
+        // For the map part of the details box
+        #largemap {
+          // Associate it with the right grid area
+          grid-area: Map;
+
+
+          // For the image
+          img {
+            // Round the corners
+            border-radius: 15px;
+
+            // Automatically resize it to cover the given area
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+          }
+        } // End large map formatting
+      } // End details box formatting
+    } // End details page formatting
+
+
+
+    // When the app is in light mode
+    &.light-mode {
+      // Flip the default colours
+      background-color: @light;
+      color: @dark;
+
+      // For headers
+      header {
+        // Lighten the background colour
+        background-color: @accent2;
+      }
+
+
+      // For buttons
+      button {
+        // Flip default colours
+        background-color: @dark;
+        color: @light;
+      }
+
+      
+      // For the day/night icon
+      .lighticon path {
+        // Change the image to a moon
+        d: path('M 6 0.278 a 0.768 0.768 0 0 1 0.08 0.858 a 7.208 7.208 0 0 0 -0.878 3.46 c 0 4.021 3.278 7.277 7.318 7.277 c 0.527 0 1.04 -0.055 1.533 -0.16 a 0.787 0.787 0 0 1 0.81 0.316 a 0.733 0.733 0 0 1 -0.031 0.893 A 8.349 8.349 0 0 1 8.344 16 C 3.734 16 0 12.286 0 7.71 C 0 4.266 2.114 1.312 5.124 0.06 A 0.752 0.752 0 0 1 6 0.278 Z');
+      }
+
+
+      // For each card on the bots page
+      #botspage ol li div {
+        // Lighten the text background colour
+        background-color: @accent2;
+
+        // When the card is hovered
+        &:hover {
+          // Keep the unhovered drop shadow colour because it is on a light background
+          filter: drop-shadow(2px 4px 6px @shade);
+        }
+      } // End bot card formatting
+
+
+      // For the details box in the details page
+      #detailspage #details {
+        // Lighten the background colour
+        background-color: @accent2;
+      }
+    } // End light mode formatting
+  } // End body formatting
+} // End all formatting
