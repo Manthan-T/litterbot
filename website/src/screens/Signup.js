@@ -128,17 +128,6 @@ const Signup = ({ onBackClick, dayMode }) => {
             return
         }
         
-        if (!phoneNumber) {
-            setFirstNameError("")
-            setLastNameError("")
-            setUsernameError("")
-            setPasswordError("")
-            setConfirmPasswordError("")
-            setEmailError("")
-            setPhoneError("Please enter your phone number")
-            return
-        }
-        
         fetch(`/signup?first_name=${firstName}&last_name=${lastName}&username=${username}&password=${password}&email=${email}&phone=${phoneNumber}`)
             .then(res => res.json()).then(data => {
                 if (data.response !== "Accepted") {
@@ -271,7 +260,7 @@ const Signup = ({ onBackClick, dayMode }) => {
                         <p>{emailError}</p>
                     </div>
                     <div className = "form-control">
-                        <label>Phone number <FaAsterisk color = "#E02828" size = "7.5px" style = {{ marginBottom : "7.5px" }}/></label>
+                        <label>Phone number</label>
                         <input type = "text" placeholder = "E.g. 07962534676" value = {phoneNumber} onChange = {(e) => setPhoneNumber(e.target.value)}/>
                         <p>{phoneError}</p>
                     </div>

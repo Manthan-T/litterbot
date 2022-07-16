@@ -42,7 +42,7 @@ def signup_verif(name, email):
     # Then, click "Select app", click "Other (custom name)", enter whatever name you want, and then click "GENERATE".
     # Enter the code provided in the place of "app_password.read()" and your email in place of "thequintuscult@gmail.com").
     with open("emailpassword.env", "r") as app_password:
-        yag = yagmail.SMTP("thequintuscult@gmail.com", app_password.read())
+        yag = yagmail.SMTP(app_password.readline(), app_password.readline())
     
     # Sends the email to the user attempting to signup
     yag.send(

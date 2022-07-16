@@ -51,7 +51,7 @@ def signup():
                 "response" : "This username is shorter than 5 characters. Please try a longer username."
                }
     
-    if username.find(" "):
+    if username.find(" ") != -1:
         return {
                 "component" : "username",
                 "response" : "This username has a space. Please remove any spaces."
@@ -63,7 +63,7 @@ def signup():
                 "response" : "This password is shorter than 8 characters. Please try a longer password."
                }
     
-    if password.find(" "):
+    if password.find(" ") != -1:
         return {
                 "component" : "password",
                 "response" : "This password has a space. Please remove any spaces."
@@ -88,14 +88,18 @@ def signup():
                 "response" : "This is not a valid email address. Please enter a valid email address."
                }
 
-    # Here it checks if the phone number is actually a number
-    try:
-        int(phone)
-    except Exception:
-        return {
-                "component" : "phone",
-                "response" : "This is not a valid phone number. Please enter a valid phone number."
-               }
+    # Here it checks if the phone number is actually a number, but it's OK if no number is provided
+    if phone != "":
+        try:
+            int(phone)
+        except Exception:
+            return {
+                    "component" : "phone",
+                    "response" : "This is not a valid phone number. Please enter a valid phone number."
+                }
+    # If none is provided, set the value of the phone number to None (or null)
+    else:
+        phone = None
 
     # If everything is fine, add the user and return a message saying that the information was accepted
     add_user(first_name, last_name, username, password, email, phone)
