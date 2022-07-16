@@ -15,8 +15,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "prodstart": "export $(cat .env | xargs) && react-scripts start",
     "build": "react-scripts build",
+    "serve": "react-scripts build && sudo serve -l 443 --ssl-cert .cert/fullchain.pem --ssl-key .cert/privkey.pem -s build",
+    "host": "sudo serve -l 443 --ssl-cert .cert/fullchain.pem --ssl-key .cert/privkey.pem -s build",
+    "redir": "node src/httpsredirect.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
