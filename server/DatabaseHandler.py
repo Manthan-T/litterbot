@@ -11,8 +11,24 @@ def alter_tables():
     cursor = conn.cursor()
     
     cursor.execute("""
-        DELETE FROM users
-        WHERE userID = 2;
+        CREATE TABLE users (
+            userID INTEGER PRIMARY KEY,
+            first_name TEXT NOT NULL,
+            last_name TEXT NOT NULL,
+            username TEXT NOT NULL UNIQUE,
+            password TEXT NOT NULL UNIQUE,
+            email_address TEXT NOT NULL,
+            phone_number TEXT,
+            date_registered TEXT NOT NULL
+        );
+    """)
+    conn.commit()
+
+    cursor.execute("""
+        CREATE TABLE not_verified (
+            userID INTEGER NOT NULL UNIQUE,
+            verif_code TEXT NOT NULL
+        );
     """)
     conn.commit()
 
@@ -46,8 +62,7 @@ def add_user(first_name, last_name, username, password, email_address, phone_num
             "{password}",
             "{email_address}",
             "{phone_number}",
-            "{date}",
-            0
+            "{date}"
         )
     """.format(
         first_name = first_name,
