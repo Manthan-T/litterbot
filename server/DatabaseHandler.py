@@ -11,29 +11,13 @@ def alter_tables():
     cursor = conn.cursor()
     
     cursor.execute("""
-        CREATE TABLE users (
-            userID INTEGER PRIMARY KEY,
-            first_name TEXT NOT NULL,
-            last_name TEXT NOT NULL,
-            username TEXT NOT NULL UNIQUE,
-            password TEXT NOT NULL UNIQUE,
-            email_address TEXT NOT NULL,
-            phone_number TEXT,
-            date_registered TEXT NOT NULL
-        );
-    """)
-    conn.commit()
-
-    cursor.execute("""
-        CREATE TABLE not_verified (
-            userID INTEGER NOT NULL UNIQUE,
-            verif_code TEXT NOT NULL
-        );
+        ALTER TABLE users
+        ADD reports_submitted INTEGER DEFAULT 0;
     """)
     conn.commit()
 
     conn.close()
-
+alter_tables()
 # In all of these methods, the first couple of lines are for connecting to the database and bringing the cursor to it.
 # The cursor executes various SQL query using "cursor.execute("[string query]")", and if the query changes a
 # table in any way (eg, adds to it or updates a value), the change needs to be commited using "conn.commit()" immediately
