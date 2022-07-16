@@ -13,8 +13,8 @@ using UnityEngine.AI;
 // Unity script).
 public class LitterbotNavigation : MonoBehaviour {
     // This is an array of all the places that a Litterbot needs to reach (junctions, the final destination, and the start).
-    // "SerializeField" allows us to input the points to be reached along the path from Unity.
-    [SerializeField] Transform[] destinations;
+    // "public" allows us to input the points to be reached along the path from Unity.
+    public Vector3[] destinations;
 
     // The index of the point that a Litterbot currently needs to reach. This changes each time the robot reaches a destination.
     int currentDestination = 0;
@@ -39,7 +39,7 @@ public class LitterbotNavigation : MonoBehaviour {
     // Update is called once per frame, and updates the destination of a Litterbot.
     void Update() {
         // Set the destination for a Litterbot using the position of the point indicated by the "currentDestination" flag
-        nvm.destination = destinations[currentDestination].position;
+        nvm.destination = destinations[currentDestination];
         
         // If the Litterbot reaches its destination...
         if (Vector3.Distance(nvm.destination, transform.position) <= 0.36) {
@@ -134,7 +134,7 @@ public class LitterbotNavigation : MonoBehaviour {
     }
     
     // Finds out whether an object is a part of the town (and should be ignored) or not, given its ID.
-    public static bool ObjectPartOfTown(int id) {
+    bool ObjectPartOfTown(int id) {
         // Make a Unity object with the flags below. We need to cast from a modified object to just an object.
         UnityEngine.Object obj = (UnityEngine.Object) typeof (UnityEngine.Object)
                     .GetMethod("FindObjectFromInstanceID", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static)
