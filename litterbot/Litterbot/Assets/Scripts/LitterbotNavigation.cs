@@ -36,7 +36,7 @@ public class LitterbotNavigation : MonoBehaviour {
         nvm = GetComponent<NavMeshAgent>();
     }
 
-    // Update is called once per frame, and updates the destination of a Litterbot.
+    // Update is called once per frame, and updates the destination of a Litterbot as well as detects rubbish.
     void Update() {
         // Set the destination for a Litterbot using the position of the point indicated by the "currentDestination" flag
         nvm.destination = destinations[currentDestination];

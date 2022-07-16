@@ -238,7 +238,7 @@ const Signup = ({ onBackClick, dayMode }) => {
                 <p/>
             </div>
 
-            {verifMode ?
+            {!verifMode ?
                 (<form className = "container" onSubmit = {onSubmitDetails}>
                     <div className = "form-control">
                         <label>First name <FaAsterisk color = "#E02828" size = "7.5px" style = {{ marginBottom : "7.5px" }}/></label>

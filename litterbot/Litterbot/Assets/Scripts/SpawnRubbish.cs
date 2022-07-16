@@ -8,7 +8,8 @@ using UnityEngine.AI;
 
 // This script causes rubbish to be spawned somewhere.
 public class SpawnRubbish : MonoBehaviour {
-    // An array of the different types of rubbish provided from the Unity editor (ie, a water bottle and a crisp packet)
+    // An array of the different types of rubbish provided from the Unity editor (ie, a water bottle and a crisp packet).
+    // "public" allows us to input the points to be reached along the path from Unity.
     public GameObject[] rubbishTypes;
 
     // The method to spawn rubbish.
