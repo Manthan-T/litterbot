@@ -20,7 +20,7 @@ public class SwitchStreams : MonoBehaviour {
     CancellationToken token;
 
     // A list of all the given app-focused bots
-    List<string> focusedBots;
+    List<GameObject> focusedBots;
     
     public void Connect() {
         // Create a cancellation token for the async methods
@@ -53,10 +53,10 @@ public class SwitchStreams : MonoBehaviour {
             switch (messageParts[0]) {
                 // Either add or remove a bot from the focused array
                 case "focusBot":
-                    focusedBots.AddRange(Array.Find<GameObject>(bots, bot => bot.name == messageParts[1]));
+                    focusedBots.AddRange(Array.Find<GameObject>(bots.ToArray(), bot => bot.name == messageParts[1]));
                     break;
                 case "unfocusBot":
-                    focusedBots.RemoveRange(Array.Find<GameObject>(bots, bot => bot.name == messageParts[1]));
+                    focusedBots.RemoveRange(Array.Find<GameObject>(bots.ToArray(), bot => bot.name == messageParts[1]));
                     break;
             }
             // If there is another message, process it as well
@@ -79,7 +79,7 @@ public class SwitchStreams : MonoBehaviour {
 
         // Send specific info for focused bots
         foreach (GameObject bot in focusedBots) {
-            Send("info;" + bot.name + ";" + bot.transform.position.x + "," + bot.transform.position.z + ";" + bot.GetComponent<NavMeshAgent>().destination.x + "," + bot.GetComponent<NavMeshAgent>().destination.z, focusedBots.IndexOf(bot) == focusedBots.Length - 1 ? true : false);
+            Send("info;" + bot.name + ";" + bot.transform.position.x + "," + bot.transform.position.z + ";" + bot.GetComponent<NavMeshAgent>().destination.x + "," + bot.GetComponent<NavMeshAgent>().destination.z, focusedBots.IndexOf(bot) == focusedBots.Count - 1 ? true : false);
         }
     }
 
@@ -104,7 +104,7 @@ public class SwitchStreams : MonoBehaviour {
 
         // For each bot that is no longer in the objects list
         foreach (GameObject bot in bots) {
-            if (!objecs.Contains(bot)) {
+            if (!Array.Exists(objecs, x => x == bot)) {
                 // Remove it from the bots list
                 bots.Remove(bot);
             }
