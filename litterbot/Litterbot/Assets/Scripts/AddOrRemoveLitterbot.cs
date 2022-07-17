@@ -19,7 +19,7 @@ public class AddOrRemoveLitterbot : MonoBehaviour {
             // Create a new Litterbot GameObject.
             GameObject newLitterbot = Instantiate(litterbot);
             // Set its location to a predetermined start point.
-            newLitterbot.transform.position = new Vector3(-3.86f, 0.5915f, -10.87f);
+            newLitterbot.transform.position = new Vector3(-3.86f, 0.5783749f, -10.87f);
             // Update the number of Litterbots present.
             litterbotCount++;
             // Update the Litterbot's name to match the count.
@@ -50,25 +50,25 @@ public class AddOrRemoveLitterbot : MonoBehaviour {
         switch (litterbotCount) {
             case 2:
                 route = new Vector3[3];
-                route[0] = new Vector3(-8, 0.5915f, -4.31f);
-                route[1] = new Vector3(-3.86f, 0.5915f, -4.31f);
-                route[2] = new Vector3(-3.86f, 0.5915f, 4.8f);
+                route[0] = new Vector3(-8, 0.5783749f, -4.31f);
+                route[1] = new Vector3(-3.86f, 0.5783749f, -4.31f);
+                route[2] = new Vector3(-3.86f, 0.5783749f, 4.8f);
                 return route;
             case 3:
                 route = new Vector3[2];
-                route[0] = new Vector3(5, 0.5915f, -4.31f);
-                route[1] = new Vector3(5, 0.5915f, 4.81f);
+                route[0] = new Vector3(5, 0.5783749f, -4.31f);
+                route[1] = new Vector3(5, 0.5783749f, 4.81f);
                 return route;
             case 4:
                 route = new Vector3[3];
-                route[0] = new Vector3(-3.86f, 0.5915f, -10.18f);
-                route[1] = new Vector3(9, 0.5915f, -10.18f);
-                route[2] = new Vector3(9, 0.5915f, -12.6f);
+                route[0] = new Vector3(-3.86f, 0.5783749f, -10.18f);
+                route[1] = new Vector3(9, 0.5783749f, -10.18f);
+                route[2] = new Vector3(9,0.5783749f, -12.6f);
                 return route;
             case 5:
                 route = new Vector3[2];
-                route[0] = new Vector3(9, 0.5915f, -10.18f);
-                route[1] = new Vector3(9, 0.5915f, 4.81f);
+                route[0] = new Vector3(9, 0.5783749f, -10.18f);
+                route[1] = new Vector3(9, 0.5783749f, 4.81f);
                 return route;
             // Just to avoid a compiler error.
             default:

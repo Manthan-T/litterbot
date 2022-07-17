@@ -21,7 +21,7 @@ public class SpawnRubbish : MonoBehaviour {
         while (!gotPoint) {
             // Choose a random point to spawn the rubbish on the map at road level. 
             Vector3 position = new Vector3(Random.Range(10.95f, -8.74f), 0.6f, Random.Range(5.35f, -14.45f));
-            
+
             // Prepare for the point being present on the NavMesh (with a 0.05 tolerence for being off the NavMesh).
             NavMeshHit hit;
             // If the point is on the roads and also the NavMesh (ie, on the road but not under a car (because how can someone drop
@@ -32,7 +32,7 @@ public class SpawnRubbish : MonoBehaviour {
 
                 // Create a new rubbish GameObject as either a water bottle or a crisp packet (models provided by the "rubbishTypes"
                 // array filled in the Unity editor).
-                if (Random.Range(0f, 1f) > 0.5f)
+                if (Random.Range(0f, 1f) > 0.5)
                     rubbishObject = Instantiate(rubbishTypes[0]);
                 else
                     rubbishObject = Instantiate(rubbishTypes[1]);

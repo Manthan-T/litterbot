@@ -41,7 +41,8 @@ public class LitterbotNavigation : MonoBehaviour {
         // Set the destination for a Litterbot using the position of the point indicated by the "currentDestination" flag
         nvm.destination = destinations[currentDestination];
         
-        // If the Litterbot reaches its destination...
+        // If the Litterbot reaches its destination... (0.36 is used because the point of the Litterbot's position is actually higher than the floor
+        // (somewhere in its middle), so this means that the Litterbot is directly over the object)
         if (Vector3.Distance(nvm.destination, transform.position) <= 0.36) {
             // ...check if either:
             // a) the Litterbot is going forwards (not backwards in the code) and the final destination has been reached
