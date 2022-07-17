@@ -13,7 +13,7 @@ This is a robot that helps clean up the streets, coupled with a website for repo
 8) [Comments that could not be written (what was done inside the Unity editor)](#comments-that-could-not-be-written-what-was-done-inside-the-unity-editor)
 
 ## The admin application
-This application was made using Electron, and will allow you to 
+This application was made using Electron, and will allow you to see the perspectives of the robots.
 
 ## The website and how to use it
 This website can be visited at [www.thequintuscult.co.uk/litterbot](https://www.thequintuscult.co.uk/litterbot)
@@ -143,6 +143,7 @@ To simulate their action, all you need to do is to press play (if simulating fro
 ## How to install and use/test our product
 If you want to set up your own server and website, replace all instances of our website's address with your address, as well as add your own emailpassword.env.
 Import the scene into a new 3D project in Unity to run the simulation.
+Run Server.py to start the server. And use "npm start" from the adminapp directory to run the application (make sure you have Electron and yarn installed, exe coming soon).
 
 ## Further steps we would take to make this a reality
 In order to have this product widespread, we may firstly need to host everything on the cloud, for a) better security and b) more uptime. We may have to implement a microservice based architechture, to enable support for more users at once and better resource efficieny. We would also have to actually make the robot, and recode it (while keeping the main concepts) to allow for interaction with hardware and generally work in the real world. We would do this using a framework called [ROS](https://www.ros.org/) which we initially looked at for making the robot simulation, but then chose Unity for the greater availability of support. In development, we would also use [CoppeliaSim](https://www.coppeliarobotics.com/) to simulate the robot (a tool that we also looked at using before deciding not to use ROS).
