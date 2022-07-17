@@ -60,7 +60,7 @@ public class SwitchStreams : MonoBehaviour {
                     break;
             }
             // If there is another message, process it as well
-        } while (!receiveTask.result.EndOfMessage);
+        } while (!receiveTask.Result.EndOfMessage);
     }
 
     public void Send(string message, bool finalMessage) {
