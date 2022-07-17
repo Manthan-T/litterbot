@@ -7,6 +7,7 @@ class WebSocketServer(Thread):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.clients = [] # Store all current clients
+        self.wss = None # Store the websocket thread
     
     def broadcast(self, message):
         websockets.broadcast(self.clients, message)
@@ -17,8 +18,16 @@ class WebSocketServer(Thread):
     async def handle(self, websocket):
         self.clients.append(websocket)
         async for message in websocket:
-            print(f"Recieved {message}")
-            await websocket.send(message)
+            print("SWS: " + message)
+            message = message.split(";") # Messages are formatted with each component split by semicolons, starting with the message type
+            # If this message is about the bot list
+            if message[0] == "bot":
+                # Store the provided bot's coordinates
+                self.wss.bots[message[1]] = message[2]
+            # If this message is about a focused bot
+            elif message[0] == "info":
+                # Store the details
+                self.wss.focused_bot_details = message[1:]
 
     async def main(self):
         self.server = await websockets.serve(self.handle, "localhost", 6969)

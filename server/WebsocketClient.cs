@@ -38,6 +38,9 @@ class WebSocketClient {
                 case "focusBot":
                     focusBot = true;
                     focusedBot = Array.Find<GameObject>(bots, bot => bot.name == messageParts[1]);
+                    break;
+                case "unfocusBot":
+                    focusBot = false;
             }
         }
     }
