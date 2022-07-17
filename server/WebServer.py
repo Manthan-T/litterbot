@@ -11,6 +11,9 @@ from MailSender import *
 # Create a flask app
 app = Flask(__name__)
 
+# Store the simulation websocket server for submitting reports
+swss = None
+
 # For every function here, the "app.route" annotation means that when the website requests something from the server,
 # it will be requested as if it were a url, for example, "[server ip]/login" (although the server ip is automatically
 # entered and is not entered by the website, so the code would be more like "fetch(/login)").
@@ -187,6 +190,8 @@ def submit_report():
     
     # Update the number of reports the user has submitted
     update_report_count(username)
+
+    swss.broadcast("spawn")
 
     # Notify that the response has been received
     return {"response" : "Submitted"}
