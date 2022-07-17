@@ -53,10 +53,10 @@ public class SwitchStreams : MonoBehaviour {
             switch (messageParts[0]) {
                 // Either add or remove a bot from the focused array
                 case "focusBot":
-                    focusedBots.AddRange(Array.Find<GameObject>(bots.ToArray(), bot => bot.name == messageParts[1]));
+                    focusedBots.Add(Array.Find<GameObject>(bots.ToArray(), bot => bot.name == messageParts[1]));
                     break;
                 case "unfocusBot":
-                    focusedBots.RemoveRange(Array.Find<GameObject>(bots.ToArray(), bot => bot.name == messageParts[1]));
+                    focusedBots.Remove(Array.Find<GameObject>(bots.ToArray(), bot => bot.name == messageParts[1]));
                     break;
             }
             // If there is another message, process it as well
