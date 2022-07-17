@@ -11,10 +11,10 @@ class WebSocketServer(Thread):
         self.swss = None # Store the simulation web socket server
 
         # Details about all bots
-        self.bots = {"jeremy": "1,3"}
+        self.bots = {"jeremy": "1,3", "john": "2,6"}
 
         # The focused bot details
-        self.focused_bot_details = {"jeremy": ("1,3", "5,7")}
+        self.focused_bot_details = {"jeremy": ("1,3", "5,7"), "john": ("5,7", "23,62")}
     
     def broadcast(self, message):
         broadcast(self.clients, message)
