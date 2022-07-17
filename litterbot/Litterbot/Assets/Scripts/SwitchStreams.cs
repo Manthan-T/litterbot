@@ -32,14 +32,15 @@ public class SwitchStreams : MonoBehaviour {
     }
 
     public void Receive() {
-        Task<WebSocketReceiveResult> result;
+        Task<WebSocketReceiveResult> receiveTask;
         // Repeat until all messages have been processed
         do {
             // Create a buffer to recieve messages in
             var buffer = new ArraySegment<byte>(new byte[100]);
 
             // Pull a message from the server
-            result = ws.ReceiveAsync(buffer, token);
+            receiveTask = ws.ReceiveAsync(buffer, token);
+            receiveTask.Wait()
 
             // Convert message to text and trim empty characters
             var message = System.Text.Encoding.UTF8.GetString(buffer.Array).TrimEnd((char) 0);
@@ -57,7 +58,7 @@ public class SwitchStreams : MonoBehaviour {
                     focusedBots.Remove(Array.Find<GameObject>(bots, bot => bot.name == messageParts[1]));
             }
             // If there is another message, process it as well
-        } while (!result.EndOfMessage);
+        } while (!receiveTask.result.EndOfMessage);
     }
 
     public void Send(string message, bool finalMessage) {
@@ -76,7 +77,7 @@ public class SwitchStreams : MonoBehaviour {
 
         // Send specific info for focused bots
         foreach (GameObject bot in focusedBots) {
-            Send("info;" + bot.name + ";" + bot.transform.position.x + "," + bot.transform.position.z + ";" + bot.GetComponent<NavMeshAgent>().destination.x + "," + bot.GetComponent<NavMeshAgent>().destination.z, false);
+            Send("info;" + bot.name + ";" + bot.transform.position.x + "," + bot.transform.position.z + ";" + bot.GetComponent<NavMeshAgent>().destination.x + "," + bot.GetComponent<NavMeshAgent>().destination.z, focusedBots.indexOf(bot) == focusedBots.Length - 1 ? true : false);
         }
     }
 
