@@ -41,7 +41,7 @@ public class SwitchStreams : MonoBehaviour {
             switch (messageParts[0]) {
                 case "focusBot":
                     focusBot = true;
-                    focusedBots.Add(Array.Find<GameObject>(bots, bot => bot.name == messageParts[1]);)
+                    focusedBots.Add(Array.Find<GameObject>(bots, bot => bot.name == messageParts[1]));
                     break;
                 case "unfocusBot":
                     focusBot = false;
