@@ -16,7 +16,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "serve": "react-scripts build && sudo serve -l 443 --ssl-cert .cert/fullchain.pem --ssl-key .cert/privkey.pem -s build",
+    "serve": "react-scripts build && sudo serve -l 443 --ssl-cert /etc/letsencrypt/live/www.thequintuscult.co.uk/fullchain.pem --ssl-key /etc/letsencrypt/live/www.thequintuscult.co.uk/privkey.pem -s build",
     "host": "sudo serve -l 443 --ssl-cert .cert/fullchain.pem --ssl-key .cert/privkey.pem -s build",
     "redir": "node src/httpsredirect.js",
     "test": "react-scripts test",
@@ -40,5 +40,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://thequintuscult.co.uk:5000"
 }
