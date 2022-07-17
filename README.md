@@ -100,7 +100,7 @@ After logging in, there are two things that you can do:
 ### What it does
 The backend server controls what goes on behind the scenes. It accepts requests from the website to get, alter, or delete information from the database via a web API built using the [Flask](https://flask.palletsprojects.com/en/2.1.x/) framework for Python. It also coordinates Litterbots sent out to areas with lots of litter and can interact with the rest of the robots as well. Finally, it also communicates with the admin application.
 
-### How to run
+### How to run the server
 All you need to do to use it is to create a file called "emailpassword.env" in the same directory as the application's (or the Python files). Then you need to create an app password using Google:
 [myaccount.google.com](https://myaccount.google.com/) -> Security -> Signing in to google -> App Passwords.
 Click "Select app", click "Other (custom name)", enter whatever name you want, and then click "GENERATE").
