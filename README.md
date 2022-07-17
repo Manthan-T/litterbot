@@ -11,6 +11,7 @@ This is a robot that helps clean up the streets, coupled with a website for repo
 6) [How to install and use/test our product](#how-to-install-and-usetest-our-product)
 7) [Further steps we would take to make this a reality](#further-steps-we-would-take-to-make-this-a-reality)
 8) [Comments that could not be written (what was done inside the Unity editor)](#comments-that-could-not-be-written-what-was-done-inside-the-unity-editor)
+9) [Challenges we faced (as we did not mention these in our presentation)](#challenges-we-faced-as-we-did-not-mention-these-in-our-presentation)
 
 ## The admin application
 This application was made using Electron, and will allow you to see the perspectives of the robots.
@@ -174,3 +175,13 @@ For simulating the robot, we used Unity editor. However, some work in Unity was 
 - Testing the scripts hundreds of times via simulation:
 
  ![This image of a simulation is not loading](readme-pics/simulation.png)
+
+## Challenges we faced (as we did not mention these in our presentation)
+### For Manthan
+- Needed to learn C# for scripting the robots
+- Needed to learn how to use Blender for modelling
+- Needed to learn how to use Unity for making a simulation
+
+### For Anshul
+- Needed to do complex networking
+- Needed to learn how to use Electron
