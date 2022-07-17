@@ -16,7 +16,7 @@ This is a robot that helps clean up the streets, coupled with a website for repo
 For anshul to fill out
 
 ## The website
-This website can be visited at [www.thequintuscult.co.uk/litterbot](www.thequintuscult.co.uk/litterbot)
+This website can be visited at [www.thequintuscult.co.uk/litterbot](https://www.thequintuscult.co.uk/litterbot)
 
 ![This image of the website's home page is not loading](readme-pics/website-home-logged-out.png)
 When we designed our website, we had one goal: clean, simple UI that was nice to look at. We settled on a dark theme by default to be relaxing to the eyes, but with colours that were not too dark to avoid a clichéd appearance. For those that like brighter colours, we added an option to toggle to day mode.
