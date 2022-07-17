@@ -1,6 +1,7 @@
 using System;
 using System.Net.WebSockets;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Text;
 
 using System.Collections;
@@ -52,10 +53,11 @@ public class SwitchStreams : MonoBehaviour {
             switch (messageParts[0]) {
                 // Either add or remove a bot from the focused array
                 case "focusBot":
-                    focusedBots.Add(Array.Find<GameObject>(bots, bot => bot.name == messageParts[1]));
+                    focusedBots.AddRange(Array.Find<GameObject>(bots, bot => bot.name == messageParts[1]));
                     break;
                 case "unfocusBot":
-                    focusedBots.Remove(Array.Find<GameObject>(bots, bot => bot.name == messageParts[1]));
+                    focusedBots.RemoveRange(Array.Find<GameObject>(bots, bot => bot.name == messageParts[1]));
+                    break;
             }
             // If there is another message, process it as well
         } while (!receiveTask.result.EndOfMessage);
@@ -77,7 +79,7 @@ public class SwitchStreams : MonoBehaviour {
 
         // Send specific info for focused bots
         foreach (GameObject bot in focusedBots) {
-            Send("info;" + bot.name + ";" + bot.transform.position.x + "," + bot.transform.position.z + ";" + bot.GetComponent<NavMeshAgent>().destination.x + "," + bot.GetComponent<NavMeshAgent>().destination.z, focusedBots.indexOf(bot) == focusedBots.Length - 1 ? true : false);
+            Send("info;" + bot.name + ";" + bot.transform.position.x + "," + bot.transform.position.z + ";" + bot.GetComponent<NavMeshAgent>().destination.x + "," + bot.GetComponent<NavMeshAgent>().destination.z, focusedBots.IndexOf(bot) == focusedBots.Length - 1 ? true : false);
         }
     }
 
@@ -98,7 +100,7 @@ public class SwitchStreams : MonoBehaviour {
         GameObject[] objecs = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
 
         // Add all bot objects that are not already added to the bots list
-        bots.AddRange(Array.FindAll<GameObject>(objecs, objec => objec.name.StartsWith("Litterbot") && !bots.Contains(objec)));
+        bots.AddRange(Array.FindAll<GameObject>(objecs, objec => (objec.name.StartsWith("Litterbot") && !bots.Contains(objec))));
 
         // For each bot that is no longer in the objects list
         foreach (GameObject bot in bots) {

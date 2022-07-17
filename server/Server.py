@@ -7,6 +7,10 @@ import SimulationWebsocketServer as swss
 wss.websocket_thread.swss = swss.websocket_thread
 swss.websocket_thread.wss = wss.websocket_thread
 
+# Provide the webserver with the simulation websocket server so it can submit "reports"
+ws.swss = swss
+
+
 # Start webserver (for communication with website)
 ws.flask_thread.start()
 

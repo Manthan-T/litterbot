@@ -8,7 +8,6 @@ let receiver;
 let useWebSocket;
 
 const playerDiv = document.getElementById('player');
-const codecPreferences = document.getElementById('codecPreferences');
 const supportsSetCodecPreferences = window.RTCRtpTransceiver &&
   'setCodecPreferences' in window.RTCRtpTransceiver.prototype;
 
@@ -36,7 +35,7 @@ function showPlayButton() {
   if (!document.getElementById('playButton')) {
     let elementPlayButton = document.createElement('img');
     elementPlayButton.id = 'playButton';
-    elementPlayButton.src = 'images/Play.png';
+    elementPlayButton.src = 'src/js/renderstreaming/images/Play.png';
     elementPlayButton.alt = 'Start Streaming';
     playButton = document.getElementById('player').appendChild(elementPlayButton);
     playButton.addEventListener('click', onClickPlayButton);
@@ -58,7 +57,7 @@ function onClickPlayButton() {
   // add fullscreen button
   const elementFullscreenButton = document.createElement('img');
   elementFullscreenButton.id = 'fullscreenButton';
-  elementFullscreenButton.src = 'images/FullScreen.png';
+  elementFullscreenButton.src = 'src/js/renderstreaming/images/FullScreen.png';
   playerDiv.appendChild(elementFullscreenButton);
   elementFullscreenButton.addEventListener("click", function () {
     if (!document.fullscreenElement || !document.webkitFullscreenElement) {
@@ -96,16 +95,9 @@ async function setupVideoPlayer(elements) {
 
   let selectedCodecs = null;
   if (supportsSetCodecPreferences) {
-    const preferredCodec = codecPreferences.options[codecPreferences.selectedIndex];
-    if (preferredCodec.value !== '') {
-      const [mimeType, sdpFmtpLine] = preferredCodec.value.split(' ');
-      const { codecs } = RTCRtpSender.getCapabilities('video');
-      const selectedCodecIndex = codecs.findIndex(c => c.mimeType === mimeType && c.sdpFmtpLine === sdpFmtpLine);
-      const selectCodec = codecs[selectedCodecIndex];
+      const selectCodec = codecs[0];
       selectedCodecs = [selectCodec];
-    }
   }
-  codecPreferences.disabled = true;
 
   await videoPlayer.setupConnection(useWebSocket, selectedCodecs);
   videoPlayer.ondisconnect = onDisconnect;
@@ -118,7 +110,6 @@ async function onDisconnect(message) {
   await receiver.stop();
   receiver = null;
   if (supportsSetCodecPreferences) {
-    codecPreferences.disabled = false;
   }
   showPlayButton();
 }
@@ -135,12 +126,7 @@ function showCodecSelect() {
     if (['video/red', 'video/ulpfec', 'video/rtx'].includes(codec.mimeType)) {
       return;
     }
-    const option = document.createElement('option');
-    option.value = (codec.mimeType + ' ' + (codec.sdpFmtpLine || '')).trim();
-    option.innerText = option.value;
-    codecPreferences.appendChild(option);
   });
-  codecPreferences.disabled = false;
 }
 
 function showStatsMessage() {
