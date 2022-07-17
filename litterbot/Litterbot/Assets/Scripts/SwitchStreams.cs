@@ -10,9 +10,6 @@ using UnityEngine.AI;
 
 public class SwitchStreams : MonoBehaviour {
     // IP and port of the server
-    public string ip = "www.thequintuscult.co.uk";
-    public int port = 6969;
-    
     // Stores all alive bots
     List<GameObject> bots;
 
@@ -23,7 +20,6 @@ public class SwitchStreams : MonoBehaviour {
 
     // A list of all the given app-focused bots
     List<string> focusedBots;
-
     
     public void Connect() {
         // Create a cancellation token for the async methods
@@ -31,18 +27,19 @@ public class SwitchStreams : MonoBehaviour {
         token = source.Token;
 
         // Create and connect the websocket
-        ws = ClientWebSocket();
-        ws.ConnectAsync("ws://" + ip + ":" + port, token).Wait();
+        ws = new ClientWebSocket();
+        ws.ConnectAsync(new System.Uri("ws://www.thequintuscult.co.uk:6969"), token).Wait();
     }
 
     public void Receive() {
+        Task<WebSocketReceiveResult> result;
         // Repeat until all messages have been processed
         do {
             // Create a buffer to recieve messages in
             var buffer = new ArraySegment<byte>(new byte[100]);
 
             // Pull a message from the server
-            var result = ws.ReceiveAsync(buffer, token);
+            result = ws.ReceiveAsync(buffer, token);
 
             // Convert message to text and trim empty characters
             var message = System.Text.Encoding.UTF8.GetString(buffer.Array).TrimEnd((char) 0);
@@ -54,17 +51,13 @@ public class SwitchStreams : MonoBehaviour {
             switch (messageParts[0]) {
                 // Either add or remove a bot from the focused array
                 case "focusBot":
-<<<<<<< HEAD
-                    focusBot = true;
-=======
->>>>>>> f65029218f5b279e44188f9b29a74570a4bcf4a0
                     focusedBots.Add(Array.Find<GameObject>(bots, bot => bot.name == messageParts[1]));
                     break;
                 case "unfocusBot":
                     focusedBots.Remove(Array.Find<GameObject>(bots, bot => bot.name == messageParts[1]));
             }
             // If there is another message, process it as well
-        } while (!result.EndOfMessage)
+        } while (!result.EndOfMessage);
     }
 
     public void Send(string message, bool finalMessage) {
@@ -78,12 +71,12 @@ public class SwitchStreams : MonoBehaviour {
     public void SendUpdates() {
         // Send general info for all bots
         foreach (GameObject bot in bots) {
-            Send("bot;" + bot.name + ";" + bot.transform.position.x + "," + bot.transform.position.z);
+            Send("bot;" + bot.name + ";" + bot.transform.position.x + "," + bot.transform.position.z, false);
         }
 
         // Send specific info for focused bots
         foreach (GameObject bot in focusedBots) {
-            Send("info;" + bot.name + ";" + bot.transform.position.x + "," + bot.transform.position.z + ";" + bot.GetComponent<NavMeshAgent>().destination.x + "," + bot.GetComponent<NavMeshAgent>().destination.z);
+            Send("info;" + bot.name + ";" + bot.transform.position.x + "," + bot.transform.position.z + ";" + bot.GetComponent<NavMeshAgent>().destination.x + "," + bot.GetComponent<NavMeshAgent>().destination.z, false);
         }
     }
 
@@ -104,8 +97,7 @@ public class SwitchStreams : MonoBehaviour {
         GameObject[] objecs = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
 
         // Add all bot objects that are not already added to the bots list
-        bots.AddRange(Array.FindAll<GameObject>(objecs, objec => objec.name.StartsWith("Litterbot") && !bots.Contains(objec)))
-
+        bots.AddRange(Array.FindAll<GameObject>(objecs, objec => objec.name.StartsWith("Litterbot") && !bots.Contains(objec)));
 
         // For each bot that is no longer in the objects list
         foreach (GameObject bot in bots) {
@@ -114,5 +106,9 @@ public class SwitchStreams : MonoBehaviour {
                 bots.Remove(bot);
             }
         }
+
+        // Do the updates
+        SendUpdates();
+        Receive();
     }
 }
