@@ -100,7 +100,10 @@ public class SwitchStreams : MonoBehaviour {
         GameObject[] objecs = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
 
         // Add all bot objects that are not already added to the bots list
-        bots.AddRange(Array.FindAll<GameObject>(objecs, objec => (objec.name.StartsWith("Litterbot") && !bots.Contains(objec))));
+        addBots = Array.FindAll<GameObject>(objecs, objec => (objec.name.StartsWith("Litterbot") && !bots.Contains(objec)));
+        if (addBots != null) {
+            bots.AddRange(addBots);
+        }
 
         // For each bot that is no longer in the objects list
         foreach (GameObject bot in bots) {
