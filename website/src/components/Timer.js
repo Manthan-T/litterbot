@@ -24,10 +24,9 @@ const Timer = ({ actionOnTimeUp, setInstructions, extra, timerNo, profile }) => 
         // Set the time left as the time left - 1.
         intTimeLeft--
         setTimeLeft(formatTime(intTimeLeft))
-        //setTimeLeft(formatTime(intTimeLeft))
 
         // If time is up, do the instructed action and reset the timer.
-        if (intTimeLeft === 0) {
+        if (intTimeLeft <= 0) {
             actionOnTimeUp()
             setInstructions("You ran out of time. Please leave this page and come back.")
             if (timerNo === "1") {
@@ -41,18 +40,19 @@ const Timer = ({ actionOnTimeUp, setInstructions, extra, timerNo, profile }) => 
     // Starts the timer when the component is loaded.
     useEffect(() => {
         if (timerNo === "1") {
-            intTimeLeft = localStorage.getItem("secsLeft" + profile + timerNo) !== null ? localStorage.getItem("secsLeft" + profile + timerNo) - new Date().getSeconds() - localStorage.getItem("secsLeft" + profile + timerNo) : 300
+            intTimeLeft = localStorage.getItem("secsLeft" + profile + timerNo) !== null && !isNaN(localStorage.getItem("secsLeft" + profile + timerNo)) && localStorage.getItem("secsLeft" + profile + timerNo) !== undefined && !(localStorage.getItem("secsLeft" + profile + timerNo) <= 0) ? (localStorage.getItem("secsLeft" + profile + timerNo) - new Date().getSeconds() - localStorage.getItem("secsLeft" + profile + timerNo)) : 300
         } else {
-            intTimeLeft = sessionStorage.getItem("secsLeft" + profile + timerNo) !== null ? sessionStorage.getItem("secsLeft" + profile + timerNo) - new Date().getSeconds() - sessionStorage.getItem("secsLeft" + profile + timerNo) : 300
+            intTimeLeft = sessionStorage.getItem("secsLeft" + profile + timerNo) !== null && isNaN(sessionStorage.getItem("secsLeft" + profile + timerNo)) && sessionStorage.getItem("secsLeft" + profile + timerNo) !== undefined && !(sessionStorage.getItem("secsLeft" + profile + timerNo) <= 0) ? (sessionStorage.getItem("secsLeft" + profile + timerNo) - new Date().getSeconds() - sessionStorage.getItem("secsLeft" + profile + timerNo)) : 300
         }
 
-        if (intTimeLeft < 0) {
+        if (intTimeLeft <= 0) {
             intTimeLeft = 0
         }
-        
-        formatTime(intTimeLeft)
 
-        // A method that is executed every second.
+        setTimeLeft(formatTime(intTimeLeft))
+
+        // A method that is executed every second
+        onCount()
         const countdown = setInterval(onCount, 1000)
         
         return () => clearInterval(countdown)
