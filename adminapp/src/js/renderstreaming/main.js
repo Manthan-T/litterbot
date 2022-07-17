@@ -11,8 +11,6 @@ const playerDiv = document.getElementById('player');
 const codecPreferences = document.getElementById('codecPreferences');
 const supportsSetCodecPreferences = window.RTCRtpTransceiver &&
   'setCodecPreferences' in window.RTCRtpTransceiver.prototype;
-const messageDiv = document.getElementById('message');
-messageDiv.style.display = 'none';
 
 window.document.oncontextmenu = function () {
   return false;     // cancel default menu
@@ -29,18 +27,9 @@ window.addEventListener('beforeunload', async () => {
 async function setup() {
   const res = await getServerConfig();
   useWebSocket = res.useWebSocket;
-  showWarningIfNeeded(res.startupMode);
   showCodecSelect();
   showPlayButton();
   showStatsMessage();
-}
-
-function showWarningIfNeeded(startupMode) {
-  const warningDiv = document.getElementById("warning");
-  if (startupMode == "private") {
-    warningDiv.innerHTML = "<h4>Warning</h4> This sample is not working on Private Mode.";
-    warningDiv.hidden = false;
-  }
 }
 
 function showPlayButton() {
@@ -125,11 +114,6 @@ async function setupVideoPlayer(elements) {
 }
 
 async function onDisconnect(message) {
-  if (message) {
-    messageDiv.style.display = 'block';
-    messageDiv.innerText = message;
-  }
-
   clearChildren(playerDiv);
   await receiver.stop();
   receiver = null;
@@ -146,12 +130,6 @@ function clearChildren(element) {
 }
 
 function showCodecSelect() {
-  if (!supportsSetCodecPreferences) {
-    messageDiv.style.display = 'block';
-    messageDiv.innerHTML = `Current Browser does not support <a href="https://developer.mozilla.org/en-US/docs/Web/API/RTCRtpTransceiver/setCodecPreferences">RTCRtpTransceiver.setCodecPreferences</a>.`;
-    return;
-  }
-
   const codecs = RTCRtpSender.getCapabilities('video').codecs;
   codecs.forEach(codec => {
     if (['video/red', 'video/ulpfec', 'video/rtx'].includes(codec.mimeType)) {
@@ -179,9 +157,6 @@ function showStatsMessage() {
       if (!(stat.type === 'inbound-rtp' && stat.kind === 'video') || stat.codecId === undefined) {
         return;
       }
-      const codec = stats.get(stat.codecId);
-      messageDiv.style.display = 'block';
-      messageDiv.innerText = `Using ${codec.mimeType} ${codec.sdpFmtpLine}, payloadType=${codec.payloadType}. Decoder: ${stat.decoderImplementation}`;
     });
   }, 1000);
 }
