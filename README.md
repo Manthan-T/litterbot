@@ -118,5 +118,6 @@ After logging in, there are two things that you can do:
 ## How to install and use/test our product
 
 ## Further steps we would take to make this a reality
+In order to have this product widespread, we may firstly need to host everything on the cloud, for a) better security and b) more uptime. We may have to implement a microservice based architechture, to enable support for more users at once and better resource efficieny. We would also have to actually make the robot, and recode it (while keeping the main concepts) to allow for interaction with hardware and generally work in the real world. We would do this using a framework called [ROS](https://www.ros.org/) which we initially looked at for making the robot simulation, but then chose Unity for the greater availability of support. In development, we would also use [CoppeliaSim](https://www.coppeliarobotics.com/) to simulate the robot (a tool that we also looked at using before deciding not to use ROS).
 
 ## Comments that could not be written (what was done inside the Unity editor)
