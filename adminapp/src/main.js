@@ -45,6 +45,7 @@ app.whenReady().then(() => {
 
 
 var botlist = {} // List of bot locations from server
+var focusedBot = undefined
 var botdetails = [] // Details of the focused bot
 var ws = undefined
 
@@ -81,11 +82,12 @@ function handleCreateWebsocket(event, ip, port) {
 function handleFocusBot(event, botname) {
   // Tell the server to focus that bot
   ws.send("focusBot;" + botname)
+  focusedBot = botname
 }
 
 function handleStopFocusBot() {
   // Tell the server to stop focusing
-  ws.send("unfocusBot")
+  ws.send("unfocusBot;" + focusedBot)
 }
 
 

@@ -1,5 +1,4 @@
 from asyncio.base_subprocess import WriteSubprocessPipeProto
-import websockets
 from websockets import serve, broadcast, ConnectionClosedOK 
 import asyncio
 from threading import Thread
@@ -15,10 +14,10 @@ class WebSocketServer(Thread):
         self.bots = {"jeremy": "1,3"}
 
         # The focused bot details
-        self.focused_bot_details = []
+        self.focused_bot_details = {"jeremy": ("1,3", "5,7")}
     
     def broadcast(self, message):
-        websockets.broadcast(self.clients, message)
+        broadcast(self.clients, message)
 
     def run(self):
         asyncio.run(self.main())
@@ -36,7 +35,7 @@ class WebSocketServer(Thread):
 
             # Store whether to send the app focused or general data
             if message.startswith("focusBot"):
-                self.clients[websocket] = True
+                self.clients[websocket] = message.split(";")[1]
             elif message.startswith("unfocusBot"):
                 self.clients[websocket] = False
 
@@ -49,7 +48,7 @@ class WebSocketServer(Thread):
         asyncio.create_task(self.send_data())
 
         # Start the server
-        self.server = await websockets.serve(self.handle, "localhost", 42069)
+        self.server = await serve(self.handle, "0.0.0.0", 42069)
         await self.server.start_serving()
         await self.server.wait_closed()
     
@@ -66,18 +65,19 @@ class WebSocketServer(Thread):
                 botmessage += ";"
             botmessage = botmessage.rstrip(";") # Remove extra ;
 
-
-            # Prepare focused message
-            infomessage = "info" + (";".join(self.focused_bot_details))
-
             # For each connected app
             try:
                 for client in self.clients:
                     # Send the data type that the client wants
                     try:
-                        await client.send(botmessage if self.clients[client] == False else infomessage)
+                        # Either send the general data...
+                        try:
+                            await client.send(botmessage if self.clients[client] == False else \
+                                                "info" + (";".join(self.focused_bot_details[self.clients[client]]))) # ...or send the requested specific data
+                        except KeyError:
+                            pass # This is thrown if a bot was focused but no focus data exists yet
                     except ConnectionClosedOK:
-                        pass # If this client was closed but has not yet been removed.
+                        pass # This is thrown iff this client was closed but has not yet been removed.
                     
                 await asyncio.sleep(1) # Repeat every second
             except RuntimeError:
