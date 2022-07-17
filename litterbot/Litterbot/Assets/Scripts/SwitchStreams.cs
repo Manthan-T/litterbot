@@ -40,7 +40,7 @@ public class SwitchStreams : MonoBehaviour {
 
             // Pull a message from the server
             receiveTask = ws.ReceiveAsync(buffer, token);
-            receiveTask.Wait()
+            receiveTask.Wait();
 
             // Convert message to text and trim empty characters
             var message = System.Text.Encoding.UTF8.GetString(buffer.Array).TrimEnd((char) 0);
