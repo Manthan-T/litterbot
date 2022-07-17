@@ -3,7 +3,6 @@ from websockets import serve, broadcast, ConnectionClosedOK
 import asyncio
 from threading import Thread
 
-
 class WebSocketServer(Thread):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

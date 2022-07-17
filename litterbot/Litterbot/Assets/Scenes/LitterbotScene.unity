@@ -773,11 +773,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1853094968961178454, guid: 1cc8de606869eda4f9c266758bfbb3d5, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1853094968961178454, guid: 1cc8de606869eda4f9c266758bfbb3d5, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1723925541489167141, guid: 1cc8de606869eda4f9c266758bfbb3d5, type: 3}
       propertyPath: m_RootOrder
@@ -3030,6 +3030,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37add6ae72c5ace40b65665be38f6c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ip: www.thequintuscult.co.uk
+  port: 6969
+  bots: []
 --- !u!114 &2036382612
 MonoBehaviour:
   m_ObjectHideFlags: 0

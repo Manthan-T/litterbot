@@ -11,8 +11,8 @@ def alter_tables():
     cursor = conn.cursor()
     
     cursor.execute("""
-        ALTER TABLE users
-        ADD reports_submitted INTEGER DEFAULT 0;
+        DELETE FROM not_verified
+        WHERE userID = 2;
     """)
     conn.commit()
 
