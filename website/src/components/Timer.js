@@ -17,7 +17,7 @@ const Timer = ({ actionOnTimeUp, setInstructions, extra, timerNo, profile }) => 
     }
 
     // The time left on the timer and a method to set it.
-    const [timeLeft, setTimeLeft] = useState(300)
+    const [timeLeft, setTimeLeft] = useState("5 minutes left")
     let [intTimeLeft, setIntTimeLeft] = useState(300)
 
     // Starts the timer when the component is loaded.

@@ -40,17 +40,49 @@ const Signup = ({ onBackClick, dayMode }) => {
     const [phoneError, setPhoneError] = useState("")
     const [codeError, setCodeError] = useState("")
 
-    // Whether the password verification mode is on, and a method to set it.
-    const [verifMode, setVerifMode] = useState(false)
 
     // A method to request an unverified user to be deleted.
     const removeUnverifiedUser = useCallback(() => {
         fetch(`/delete_user?username=${username}&password=${password}`)
     }, [username, password])
 
-    // When loaded, set this as the current page.
+    // Checks whether the last user closed the tab, and if
+    const getVerifModeStatus = () => {
+        if (localStorage.getItem("profilePending") !== null) {
+            fetch(`/delete_user?username=${localStorage.getItem("profilePending")}&password=${localStorage.getItem("passwordPending")}`)
+            localStorage.removeItem("profilePending")
+            localStorage.removeItem("passwordPending")
+        }
+        return false
+    }
+
+    // Whether the password verification mode is on, and a method to set it.
+    const [verifMode, setVerifMode] = useState(sessionStorage.getItem("verifMode") !== null ? sessionStorage.getItem("verifMode") : getVerifModeStatus())
+
+    // When loaded, set this as the current page, and set whether the verification mode is on or not before reload.
     useEffect(() => {
         sessionStorage.setItem("page", "signup")
+
+        window.addEventListener("beforeunload", () => {
+            if (verifMode) {
+                sessionStorage.setItem("verifMode", true)
+                localStorage.setItem("profilePending", username)
+                localStorage.setItem("passwordPending", password)
+            } else {
+                sessionStorage.setItem("verifMode", false)
+            }
+        })
+        return () => {
+            window.removeEventListener("beforeunload", () => {
+                if (verifMode) {
+                    sessionStorage.setItem("verifMode", true)
+                    localStorage.setItem("profilePending", username)
+                    localStorage.setItem("passwordPending", password)
+                } else {
+                    sessionStorage.setItem("verifMode", false)
+                }
+            })
+        }
     })
 
     // What to do on submitting the signup account form.
