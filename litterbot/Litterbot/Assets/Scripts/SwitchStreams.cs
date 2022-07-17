@@ -19,7 +19,7 @@ public class SwitchStreams : MonoBehaviour {
     CancellationToken token;
 
     bool focusBot;
-    string focusedBot;
+    List<string> focusedBots;
 
 
     public void Connect() {
@@ -41,7 +41,7 @@ public class SwitchStreams : MonoBehaviour {
             switch (messageParts[0]) {
                 case "focusBot":
                     focusBot = true;
-                    focusedBot = Array.Find<GameObject>(bots, bot => bot.name == messageParts[1]);
+                    focusedBots.Add(Array.Find<GameObject>(bots, bot => bot.name == messageParts[1]);)
                     break;
                 case "unfocusBot":
                     focusBot = false;
@@ -58,6 +58,9 @@ public class SwitchStreams : MonoBehaviour {
     public void SendUpdates() {
         foreach (GameObject bot in bots) {
             Send("bot;" + bot.name + ";" + bot.transform.position.x + "," + bot.transform.position.z);
+        }
+
+        foreach (GameObject bot in focusedBots) {
             Send("info;" + bot.name + ";" + bot.transform.position.x + "," + bot.transform.position.z + ";" + bot.GetComponent<NavMeshAgent>().destination.x + "," + bot.GetComponent<NavMeshAgent>().destination.z);
         }
     }

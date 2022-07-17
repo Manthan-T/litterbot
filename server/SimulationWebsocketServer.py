@@ -27,10 +27,10 @@ class WebSocketServer(Thread):
             # If this message is about a focused bot
             elif message[0] == "info":
                 # Store the details
-                self.wss.focused_bot_details = message[1:]
+                self.wss.focused_bot_details[message[1]] = tuple(message[2:]) # Lists are unhashable
 
     async def main(self):
-        self.server = await websockets.serve(self.handle, "localhost", 6969)
+        self.server = await websockets.serve(self.handle, "0.0.0.0", 6969)
         await self.server.start_serving()
         await self.server.wait_closed()
 
