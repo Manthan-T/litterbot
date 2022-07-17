@@ -16,6 +16,15 @@ This is a robot that helps clean up the streets, coupled with a website for repo
 ## The admin application
 This application was made using Electron, and will allow you to see the perspectives of the robots.
 
+![This image of the admin app's home page is not loading](readme-pics/homepage.png)
+The Admin App, like the website, was designed to have a clean UI that is responsive and smooth. The theme was used from the website, and has a day and a night mode. You can click on start to connect and load the app.
+
+![This image of the admin app's bots page is not loading](readme-pics/botspage.png)
+This lists the bots on cards in a grid that automatically resizes. Again, animations were a key part of the project, so the cards are very interactive. You can press reload to manually reload the bots, or the page automatically reloads every 10 seconds.
+
+![This image of the admin app's details page is not loading](readme-pics/details.png)
+This page shows the specifics for each bot, including details about it and (originally) a display that shows what the robot is currently seeing. This only pulls the extra details (here only the destination, but in the full version this would include litter maps and current charge etc) when the card is clicked, meaning that extra data is not sent when it is not needed.
+
 ## The website and how to use it
 This website can be visited at [www.thequintuscult.co.uk/litterbot](https://www.thequintuscult.co.uk/litterbot)
 
