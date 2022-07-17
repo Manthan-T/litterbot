@@ -98,5 +98,5 @@ async function handleGetBots() {
 }
 
 async function handleGetFocusedBotDetails() {
-  return botdetails
+  return [focusedBot].concat(botdetails)
 }

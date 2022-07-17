@@ -6,9 +6,12 @@ function back() {
 }
 
 function getData() {
-    window.electronAPI.getFocusedBotData().then((data) => {
-        document.getElementById("name").innerText = data.name
-        document.getElementById("coordinates").innerText = data.coordinates
-        document.getElementById("destination").innerText = data.coordinates
+    window.electronAPI.getFocusedBotDetails().then((data) => {
+        document.getElementById("name").innerText = data[0]
+        document.getElementById("coords").innerText = data[1]
+        document.getElementById("destination").innerText = data[2]
     })
 }
+
+getData()
+setInterval(getData, 1000)
