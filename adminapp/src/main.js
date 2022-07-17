@@ -44,22 +44,20 @@ app.whenReady().then(() => {
 });
 
 
-let botlist = {
-  1: [27, 36],
-  2: [41, 21]
-} // List of bot locations from server
+var botlist = {} // List of bot locations from server
+var botdetails = [] // Details of the focused bot
+var ws = undefined
 
 function handleCreateWebsocket(event, ip, port) {
   // Create the websocket
-    try {
     ws = new WebSocket('ws://' + ip + ':' + port);
 
     // Create a handler for all received messages from the server
     ws.on('message', function(data, isBinary) {
-      // Messages are formatted in parts separated by ; e.g. 'botlist ; 1,18,27 ; 2,36,21'
-      // This example represents two robots at coordinates (18,27) and (36,21) with IDs 1 and 2
-      console.log(data.toString())
+      // Messages are formatted in parts separated by ; e.g. 'botlist;jeremy,18,27;john,36,21'
+      // This example represents two robots at coordinates (18,27) and (36,21) with IDs jeremy and john
       message = data.toString().split(';');
+      console.log(data.toString())
 
       // Choose a handler based on the message type
       switch (message[0]) {
@@ -71,27 +69,32 @@ function handleCreateWebsocket(event, ip, port) {
             botlist[robot.split(',')[0]] = robot.split(',').slice(1).map((x) => parseInt(x, 10))
           }
           break;
+        case 'info':
+          // Copy over sent data
+          botdetails = message.slice(1)
+          break;
       }
     })
-  } catch (e) {
-    console.log(e.stack)
-  }
 }
 
-function handleFocusBot() {
-
+// When a bot is clicked
+function handleFocusBot(event, botname) {
+  // Tell the server to focus that bot
+  ws.send("focusBot;" + botname)
 }
 
 function handleStopFocusBot() {
-
+  // Tell the server to stop focusing
+  ws.send("unfocusBot")
 }
 
 
-// Handle requests to communicate with server
+
+// Handle requests to get details from server
 async function handleGetBots() {
   return botlist
 }
 
 async function handleGetFocusedBotDetails() {
-
+  return botdetails
 }

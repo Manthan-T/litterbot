@@ -8,4 +8,7 @@ function start() {
     // Hide the start page and show the bots page
     document.getElementById('startpage').style.display = 'none';
     document.getElementById('botspage').style.display = 'block';
+
+    // Reload the bots page
+    reload()
 }
