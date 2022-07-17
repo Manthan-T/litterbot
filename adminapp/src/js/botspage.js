@@ -11,7 +11,6 @@ function openBotDetails(botname) {
 function reload() {
     // Get the bot list and add them to the HTML
     botlist = document.getElementById('botlist')
-    console.log(botlist)
     botlist.replaceChildren()
     window.electronAPI.getBots().then((bots) => {
         for (const botname in bots) {

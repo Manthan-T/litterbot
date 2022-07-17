@@ -1,8 +1,8 @@
 import { Signaling, WebSocketSignaling } from "./signaling.js";
-import { Observer, Sender } from ".sender.js";
+import { Observer, Sender } from "./sender.js";
 import { InputRemoting } from "./inputremoting.js";
-import Peer from ".js/peer.js";
-import * as Logger from ".js/logger.js";
+import Peer from "./peer.js";
+import * as Logger from "./logger.js";
 
 
 function uuid4() {
