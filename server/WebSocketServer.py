@@ -15,7 +15,7 @@ class WebSocketServer(Thread):
         # The focused bot details
         self.focused_bot_details = {"jeremy": ("1,3", "5,7"), "john": ("5,7", "23,62")}
     
-    def broadcast(self, message):
+    def broadcast(self, message):   
         broadcast(self.clients, message)
 
     def run(self):
@@ -72,7 +72,7 @@ class WebSocketServer(Thread):
                         # Either send the general data...
                         try:
                             await client.send(botmessage if self.clients[client] == False else \
-                                                "info" + (";".join(self.focused_bot_details[self.clients[client]]))) # ...or send the requested specific data
+                                                "info;" + (";".join(self.focused_bot_details[self.clients[client]]))) # ...or send the requested specific data
                         except KeyError:
                             pass # This is thrown if a bot was focused but no focus data exists yet
                     except ConnectionClosedOK:
