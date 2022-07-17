@@ -16,6 +16,7 @@ This is a robot that helps clean up the streets, coupled with a website for repo
 For anshul to fill out
 
 ## The website
+![This image of the website's home page is not loading](readme-pics/website-home-logged-out.png)
 
 ## The backend server
 
